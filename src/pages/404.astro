@@ -94,6 +94,24 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
 
       .brand img { width: 2.1rem; height: 2.1rem; object-fit: contain; }
 
+      .not-found-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 0.85rem;
+      }
+
+      .not-found-links a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .not-found-links a:hover,
+      .not-found-links a:focus-visible {
+        color: var(--acid);
+        outline: none;
+      }
+
       .not-found-meta { color: rgba(251, 251, 247, 0.6); }
 
       .not-found-content {
@@ -193,11 +211,14 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
   <body>
     <main class="not-found">
       <header class="not-found-nav">
-        <a class="brand" href={base} aria-label="WTFIS home">
-          <img src={`${base}WTFIS%20logo%20main.png`} alt="" width="1024" height="1024" />
-          <span>WTFIS</span>
+        <a class="brand" href={base} aria-label="WTF projects home">
+          <span>&gt;WTF</span>
         </a>
-        <span>404 / Path not found</span>
+        <nav class="not-found-links" aria-label="Project links">
+          <a href={`${base}wtfis/`}>WTFIS</a>
+          <a href={`${base}fgen/`}>FGEN</a>
+          <span>404 / Path not found</span>
+        </nav>
       </header>
       <section class="not-found-content" aria-labelledby="not-found-title">
         <h1 class="code" id="not-found-title">404</h1>
@@ -205,7 +226,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
         <a class="home-link" href={base}>&lt;- Back home</a>
       </section>
       <footer class="not-found-meta">
-        <span>WTFIS CLI</span>
+        <span>&gt;WTF</span>
         <span>Find the folder, then move on.</span>
       </footer>
     </main>

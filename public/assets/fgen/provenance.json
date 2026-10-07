@@ -1,0 +1,172 @@
+{
+  "schema": "wtfis-fgen-media-provenance/v1",
+  "generatedAt": "2026-10-06",
+  "directory": "public/assets/fgen",
+  "tooling": {
+    "generator": "fgen (fuckinggen CLI, ChatGPT Images subscription backend)",
+    "generationPolicy": "Every generated raster in this manifest was produced by an explicit fgen gen command with an explicit --out path. No --last/state reference was used.",
+    "optimization": "Generated PNG outputs were converted with cwebp -quiet -q 84 to the served WebP paths. Transparent PNG cutouts were resized in place to 1024x1024 with macOS sips; alpha was rechecked after resizing."
+  },
+  "research": {
+    "agentIdentities": [
+      {
+        "name": "Claude Code",
+        "officialReference": "https://docs.anthropic.com/en/docs/claude-code/overview"
+      },
+      {
+        "name": "Codex/OpenAI",
+        "officialReference": "https://openai.com/codex/"
+      },
+      {
+        "name": "Cursor",
+        "officialReference": "https://www.cursor.com/"
+      },
+      {
+        "name": "GitHub Copilot",
+        "officialReference": "https://github.com/features/copilot"
+      },
+      {
+        "name": "Gemini CLI",
+        "officialReference": "https://github.com/google-gemini/gemini-cli"
+      },
+      {
+        "name": "OpenCode",
+        "officialReference": "https://github.com/opencode-ai/opencode"
+      },
+      {
+        "name": "Cline",
+        "officialReference": "https://github.com/cline/cline"
+      },
+      {
+        "name": "Aider",
+        "officialReference": "https://aider.chat/"
+      }
+    ],
+    "internetArtwork": {
+      "title": "AI generated Art with Midjourney.png",
+      "description": "Heraldic butterfly with four blue open wings",
+      "creator": "George Grigorescu",
+      "generator": "Midjourney",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:AI_generated_Art_with_Midjourney.png",
+      "originalDownload": "https://upload.wikimedia.org/wikipedia/commons/3/3e/AI_generated_Art_with_Midjourney.png",
+      "license": "Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sourceDimensions": "512x512",
+      "attribution": "AI generated Art with Midjourney — George Grigorescu, via Wikimedia Commons, CC BY-SA 4.0. Converted to WebP for delivery; no endorsement implied."
+    },
+    "chatgptLogo": {
+      "source": "https://github.com/openai/sign-in-with-chatgpt-devkit",
+      "sourceFile": "https://raw.githubusercontent.com/openai/sign-in-with-chatgpt-devkit/main/assets/brand/chatgpt-card-24.svg",
+      "description": "Official OpenAI Sign in with ChatGPT devkit brand SVG, copied without raster generation.",
+      "brandGuidelines": "https://openai.com/brand/"
+    },
+    "fgenLogo": {
+      "sourcePath": "/Users/volodymurvasualkiw/GSpace/Opensource/WTF/fuckinggen/assets/logo.png",
+      "description": "Copied from the sibling fuckinggen repository without modification."
+    }
+  },
+  "assets": {
+    "logo.png": {
+      "kind": "copied-source",
+      "dimensions": "1024x1111",
+      "format": "PNG RGBA",
+      "alpha": "present; source alpha retained",
+      "sha256": "cc47693eae630f81ad40d535db3033f52f2aed8754412cbec158b382648e47e4"
+    },
+    "agent-collage.png": {
+      "kind": "fgen-generated-transparent-cutout",
+      "dimensions": "800x800",
+      "format": "PNG RGBA",
+      "alpha": "verified: min 0, max 255, 201241 fully transparent pixels",
+      "sha256": "da9f02d087f03b6dc5ed3da4652fa2891402405af01a122b312eb6932fcf8ada",
+      "prompt": "One compact overlapping sticker collage icon with eight coding-agent emblems: Claude orange starburst, OpenAI white knot, Cursor black pointer, Copilot goggles face, Gemini gradient star, OpenCode black brackets, Cline blue robot, Aider green terminal chevron. All eight emblems cluster tightly into ONE circular pile of dimensional die-cut stickers, overlap slightly, white sticker edges, bright colors, readable at small size. No grid. No text or names. True transparent alpha background with nothing outside silhouette. Square.",
+      "command": "fgen gen <prompt> --out /tmp/fgen-agent-cluster.png --quality medium --size 1024x1024 --timeout 300 --json",
+      "generationEvidence": "FGEN saved 1662707 bytes; 1254x1254 RGBA source contained 494632 fully transparent pixels. Resized to 800x800 with Pillow LANCZOS and saved as PNG."
+    },
+    "human-cutout.png": {
+      "kind": "fgen-generated-transparent-cutout",
+      "dimensions": "1024x1024",
+      "format": "PNG RGBA",
+      "alpha": "verified: min 0, max 255, 1048375 pixels below 255",
+      "sha256": "b4218f9581e82157af30fe6d987c960aa73ad8a08843502c5bd694991f2af02e",
+      "prompt": "Transparent isolated square portrait of an adult human face only, a comically warped editorial caricature with stretched cheeks, one oversized surprised eye, tiny pursed mouth, asymmetrical ears, and delightfully uncanny expression; vivid cobalt blue, acid chartreuse, coral, and warm skin tones; high-detail painterly digital illustration with surreal rubbery distortion; head and neck fully inside frame; true transparent alpha around the silhouette; no checkerboard painted into background; no text, no logo, no watermark, no minors, no nudity.",
+      "command": "fgen gen <prompt> --out public/assets/fgen/human-cutout.png --quality high --size 1024x1024 --timeout 300 --json",
+      "generationEvidence": "fgen JSON summary saved /Users/volodymurvasualkiw/GSpace/Opensource/WTF/WTFIS-CLI/public/assets/fgen/human-cutout.png (2000844 bytes before resize)."
+    },
+    "hero-generated.webp": {
+      "kind": "fgen-generated",
+      "dimensions": "1254x1254",
+      "format": "WebP lossy",
+      "sha256": "334d3756894b298f66f8472e13372d755f5cb64d6ab81e5757c860b38e48e298",
+      "prompt": "Vivid surreal editorial hero image for an experimental AI command-line website: a luminous electric-blue terminal window floating in a paper-white void, erupting into acid-chartreuse ribbons, molten orange sparks, impossible magenta geometry, tiny pixel stars and a humorous off-kilter perspective; crisp graphic-design composition, high contrast, energetic but clean, square artwork with no readable text, no logos, no watermark, no border.",
+      "command": "fgen gen <prompt> --out public/assets/fgen/hero-generated.png --quality high --size 1024x1024 --timeout 300 --json; cwebp -quiet -q 84 hero-generated.png -o hero-generated.webp",
+      "generationEvidence": "fgen JSON summary saved /Users/volodymurvasualkiw/GSpace/Opensource/WTF/WTFIS-CLI/public/assets/fgen/hero-generated.png (1828643 bytes before WebP conversion)."
+    },
+    "chatgpt.svg": {
+      "kind": "official-existing-svg",
+      "dimensions": "viewBox supplied by source SVG",
+      "format": "SVG",
+      "sha256": "e995a4aac81c3c83050e29d8ee52fa26070946028104238d9a0dc7c480db2af1",
+      "source": "https://raw.githubusercontent.com/openai/sign-in-with-chatgpt-devkit/main/assets/brand/chatgpt-card-24.svg",
+      "licenseNote": "OpenAI brand asset; retain OpenAI brand guidance and do not imply endorsement."
+    },
+    "internet-generated.webp": {
+      "kind": "existing-online-ai-art",
+      "dimensions": "512x512",
+      "format": "WebP lossy",
+      "sha256": "74e4b52f3199dfec704690c9469d8237f09a2fa1dc1096023c914b4e32b7d1d3",
+      "source": "https://commons.wikimedia.org/wiki/File:AI_generated_Art_with_Midjourney.png",
+      "license": "CC BY-SA 4.0",
+      "attribution": "AI generated Art with Midjourney — George Grigorescu, via Wikimedia Commons",
+      "conversion": "Downloaded original PNG from Wikimedia Commons and converted with cwebp -quiet -q 84; this image was not generated by this project or by fgen."
+    },
+    "float-01.webp": {
+      "kind": "fgen-generated-parallax",
+      "dimensions": "1254x1254",
+      "format": "WebP lossy",
+      "sha256": "01d6ea11ddc240c300b0fc02cf55e29d5575532288e6973cb5e35077a8d13ee9",
+      "prompt": "Square surreal editorial artwork: a cobalt-blue chrome jellyfish hovering above a grid of tiny acid-lime circuit flowers, warm coral sky, bold flat shapes with painterly texture, playful impossible lighting, no text, no logo, no watermark.",
+      "command": "fgen gen <prompt> --out public/assets/fgen/float-01.png --quality medium --size 1024x1024 --timeout 300 --json; cwebp -quiet -q 84 float-01.png -o float-01.webp"
+    },
+    "float-02.webp": {
+      "kind": "fgen-generated-parallax",
+      "dimensions": "1254x1254",
+      "format": "WebP lossy",
+      "sha256": "69800380af461106d9a7c7e99fcd81e7eb4095e3576687b9f1e7cdc7641ead67",
+      "prompt": "Square surreal editorial artwork: a bright orange spiral staircase growing from a purple cloud into a tiny electric-blue moon, graphic poster composition, tactile paper grain, vivid color contrast, no text, no logo, no watermark.",
+      "command": "fgen gen <prompt> --out public/assets/fgen/float-02.png --quality medium --size 1024x1024 --timeout 300 --json; cwebp -quiet -q 84 float-02.png -o float-02.webp"
+    },
+    "float-03.webp": {
+      "kind": "fgen-generated-parallax",
+      "dimensions": "1254x1254",
+      "format": "WebP lossy",
+      "sha256": "68130dba80732313957c8bc650257bcca5eb02af89c202f25313c6ae7fa6539e",
+      "prompt": "Square surreal editorial artwork: a mint-green robot hand gently holding a glowing pink seed that sprouts blue lightning leaves, absurd optimistic science-fiction still life, crisp editorial illustration, no text, no logo, no watermark.",
+      "command": "fgen gen <prompt> --out public/assets/fgen/float-03.png --quality medium --size 1024x1024 --timeout 300 --json; cwebp -quiet -q 84 float-03.png -o float-03.webp"
+    },
+    "float-04.webp": {
+      "kind": "fgen-generated-parallax",
+      "dimensions": "1254x1254",
+      "format": "WebP lossy",
+      "sha256": "ceffaac1183731f22f5a2dc526e452601bdc1db936af56bc8baa1d7997b692ef",
+      "prompt": "Square surreal editorial artwork: a red-orange sun wearing a tiny cobalt hat above an acid-green ocean of geometric waves, dreamlike offset perspective, screenprint textures, humorous and energetic, no text, no logo, no watermark.",
+      "command": "fgen gen <prompt> --out public/assets/fgen/float-04.png --quality medium --size 1024x1024 --timeout 300 --json; cwebp -quiet -q 84 float-04.png -o float-04.webp"
+    },
+    "float-05.webp": {
+      "kind": "fgen-generated-parallax",
+      "dimensions": "1254x1254",
+      "format": "WebP lossy",
+      "sha256": "fb949f299a95ee1b5ad6fbc9a523353c65379ae395b2b74d5df40f3efad93192",
+      "prompt": "Square surreal editorial artwork: a glass cube full of violet smoke, yellow stars and one tiny blue ladder, floating over a cream paper background with deep shadows, modern art print, vivid clean shapes, no text, no logo, no watermark.",
+      "command": "fgen gen <prompt> --out public/assets/fgen/float-05.png --quality medium --size 1024x1024 --timeout 300 --json; cwebp -quiet -q 84 float-05.png -o float-05.webp"
+    },
+    "float-06.webp": {
+      "kind": "fgen-generated-parallax",
+      "dimensions": "1254x1254",
+      "format": "WebP lossy",
+      "sha256": "0000162b3bd06a3dfd9939d89e1c3b2bbcbe7d3ab4a264b60f9366a965004843",
+      "prompt": "Square surreal editorial artwork: a cobalt whale swimming through a coral-colored night sky between floating green keyboards and tiny silver planets, playful nonlinear composition, bold digital painting, no text, no logo, no watermark.",
+      "command": "fgen gen <prompt> --out public/assets/fgen/float-06.png --quality medium --size 1024x1024 --timeout 300 --json; cwebp -quiet -q 84 float-06.png -o float-06.webp"
+    }
+  }
+}

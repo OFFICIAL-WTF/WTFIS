@@ -1,0 +1,199 @@
+---
+import { fgenInstall, fgenReleases } from "../data/fgen-install";
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+---
+
+<section class="image-flight" id="image-flight" aria-label="Generated image gallery and FGEN installation">
+  <div class="flight-frame">
+    <div class="flight-gallery" aria-hidden="true">
+      {[8, 65, 37, 77, 14, 46].map((left, index) => (
+        <figure class="flight-art" style={`--left:${left}%;--tilt:${[-12, 9, -6, 13, 7, -9][index]}deg`} data-depth={[0.7, 1.1, 0.85, 1.3, 1.05, 0.8][index]}>
+          <img src={`${base}assets/fgen/float-0${index + 1}.webp`} alt="" width="800" height="800" decoding="async" />
+        </figure>
+      ))}
+    </div>
+    <div class="flight-install install-tray" id="install" data-nav-light>
+      <div class="fgen-install-inner">
+        <h2 class="install-heading">FGEN</h2>
+        <div class="fgen-installer">
+          <div class="install-tabs" role="tablist" aria-label="Install platform">
+            {fgenInstall.map((platform, index) => (
+              <button class="platform-tab" type="button" role="tab" id={`tab-${platform.id}`} aria-controls={`install-${platform.id}`} aria-selected={index === 0 ? "true" : "false"} tabindex={index === 0 ? 0 : -1}>
+                <img src={`${base}${platform.icon}`} alt="" width="18" height="18" />
+                {platform.label}
+              </button>
+            ))}
+          </div>
+          {fgenInstall.map((platform) => (
+            <div class="fgen-platform-panel install-shell" id={`install-${platform.id}`} role="tabpanel" aria-labelledby={`tab-${platform.id}`}>
+              <div class="install-shell-header">
+                <span class="terminal-lights" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="terminal-name">{platform.id === "windows" ? "POWERSHELL" : "TERMINAL"} / INSTALL</span>
+                <button class="copy-button" type="button" data-fgen-copy={platform.command} aria-label={`Copy ${platform.label} install command`}>copy</button>
+              </div>
+              <pre tabindex="0" aria-label={`${platform.label} install command`}><code>{platform.command}</code></pre>
+            </div>
+          ))}
+          <div class="install-next">
+            <a href={fgenReleases} target="_blank" rel="noreferrer">downloads ↗</a>
+            <a href={`${base}fgen/docs/#auth`}>codex login →</a>
+            <a href={`${base}fgen/docs/`}>docs →</a>
+          </div>
+          <span class="copy-status" role="status" aria-live="polite"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .image-flight { position: relative; z-index: 2; overflow-x: clip; }
+  .flight-frame { position: relative; }
+  .flight-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 4vw, 4rem); max-width: 76rem; margin: 0 auto; padding: 6rem var(--edge); }
+  .flight-art { margin: 0; transform: rotate(var(--tilt)); }
+  .flight-art img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border: 3px solid var(--white); box-shadow: 0.6rem 0.7rem 0 rgba(11, 40, 182, 0.7); }
+  .flight-install { min-height: 85svh; display: grid; place-items: center; padding: 7rem var(--edge) 4rem; scroll-margin-top: 6rem; }
+  .fgen-install-inner { width: min(100%, 74rem); display: grid; grid-template-columns: 0.75fr 1.25fr; align-items: start; gap: clamp(2rem, 5vw, 6rem); }
+  .fgen-install-inner .install-heading { font-size: clamp(4rem, 9vw, 9rem); margin-top: 3.7rem; }
+  .fgen-installer { min-width: 0; }
+  .install-tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1rem; }
+  .platform-tab { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 2.8rem; padding: 0.65rem 0.8rem; border: 1px solid rgba(16,39,133,0.25); border-radius: 999px; background: transparent; color: var(--ink); font-size: 0.68rem; }
+  .platform-tab img { width: 1rem; height: 1rem; object-fit: contain; }
+  .platform-tab[aria-selected="true"] { border-color: var(--electric-blue); background: var(--electric-blue); color: var(--white); }
+  .platform-tab[aria-selected="true"] img { filter: brightness(0) invert(1); }
+  .platform-tab:hover { border-color: var(--electric-blue); }
+  .platform-tab:focus-visible, .copy-button:focus-visible, .install-next a:focus-visible, pre:focus-visible { outline: 2px solid var(--electric-blue); outline-offset: 4px; }
+  .fgen-platform-panel { width: 100%; margin-bottom: 1rem; }
+  .fgen-platform-panel[hidden] { display: none; }
+  .fgen-platform-panel pre { margin: 0; max-height: 39svh; min-height: 7rem; overflow: auto; padding: 1.5rem 1.25rem; scrollbar-color: var(--acid) #0b1d82; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .fgen-platform-panel code { color: var(--white); font-family: "IBM Plex Mono", monospace; font-size: 0.75rem; line-height: 1.8; white-space: pre-wrap; }
+  .fgen-platform-panel .copy-button { margin-left: auto; min-height: 2rem; border-color: rgba(251,251,247,0.4); color: var(--white); background: transparent; }
+  .fgen-platform-panel .copy-button:hover { color: var(--ink); background: var(--acid); }
+  .fgen-platform-panel .copy-button:focus-visible { outline-color: var(--acid); }
+  .install-next { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1.4rem; }
+  .install-next a { text-decoration: none; font-size: 0.7rem; color: var(--ink); padding-block: 0.5rem; }
+  .install-next a:hover { text-decoration: underline; }
+  .copy-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .image-flight.is-animated { height: 310svh; }
+  .is-animated .flight-frame { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+  .is-animated .flight-gallery { position: absolute; inset: 0; display: block; max-width: none; padding: 0; }
+  .is-animated .flight-art { position: absolute; top: 0; left: var(--left); width: clamp(10rem, 24vw, 23rem); }
+  .is-animated .flight-art:nth-child(2n) { width: clamp(8rem, 19vw, 18rem); }
+  .is-animated .flight-install { position: absolute; inset: 0; min-height: 0; padding-block: 6.5rem 2rem; }
+  @media (max-width: 760px) {
+    .fgen-install-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+    .fgen-install-inner .install-heading { margin: 0; font-size: clamp(4rem, 18vw, 7rem); text-align: left; }
+    .flight-install { min-height: 100svh; padding: 6rem 1.25rem 3rem; }
+    .fgen-platform-panel pre { max-height: 31svh; min-height: 6rem; padding: 1rem; }
+    .fgen-platform-panel code { font-size: 0.66rem; }
+    .install-tabs { gap: 0.35rem; }
+    .platform-tab { font-size: 0.62rem; padding: 0.6rem 0.75rem; min-height: 2.6rem; }
+    .install-next { margin-top: 0.7rem; gap: 1rem; }
+    .flight-gallery { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .is-animated .flight-art { width: 41vw; left: calc(var(--left) * 0.77); }
+    .is-animated .flight-art:nth-child(2n) { width: 35vw; }
+  }
+  @media (max-height: 650px) and (min-width: 761px) {
+    .fgen-install-inner .install-heading { font-size: 6rem; }
+    .fgen-platform-panel pre { max-height: 34svh; }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+
+  const installer = document.querySelector<HTMLElement>(".fgen-installer");
+  if (installer) {
+    const tabs = [...installer.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+    const panels = [...installer.querySelectorAll<HTMLElement>('[role="tabpanel"]')];
+    const select = (index: number, focus = false) => {
+      tabs.forEach((tab, i) => {
+        tab.setAttribute("aria-selected", String(i === index));
+        tab.tabIndex = i === index ? 0 : -1;
+        panels[i].hidden = i !== index;
+      });
+      if (focus) tabs[index].focus();
+      ScrollTrigger.refresh();
+    };
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => select(index));
+      tab.addEventListener("keydown", (event) => {
+        let next = index;
+        if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+        else if (event.key === "ArrowLeft") next = (index + tabs.length - 1) % tabs.length;
+        else if (event.key === "Home") next = 0;
+        else if (event.key === "End") next = tabs.length - 1;
+        else return;
+        event.preventDefault();
+        select(next, true);
+      });
+    });
+    select(0);
+    installer.querySelectorAll<HTMLButtonElement>("[data-fgen-copy]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const status = installer.querySelector<HTMLElement>(".copy-status");
+        try {
+          await navigator.clipboard.writeText(button.dataset.fgenCopy ?? "");
+          button.textContent = "copied";
+          if (status) status.textContent = "Install command copied.";
+        } catch {
+          const code = button.closest(".fgen-platform-panel")?.querySelector("code");
+          if (code) {
+            const range = document.createRange();
+            range.selectNodeContents(code);
+            window.getSelection()?.removeAllRanges();
+            window.getSelection()?.addRange(range);
+          }
+          button.textContent = "selected";
+          if (status) status.textContent = "Command selected. Copy with your keyboard.";
+        }
+        window.setTimeout(() => { button.textContent = "copy"; }, 1800);
+      });
+    });
+  }
+
+  const flight = document.querySelector<HTMLElement>(".image-flight");
+  if (flight) {
+    const media = gsap.matchMedia();
+    media.add("(prefers-reduced-motion: no-preference)", () => {
+      flight.classList.add("is-animated");
+      const art = [...flight.querySelectorAll<HTMLElement>(".flight-art")];
+      const timeline = gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: { id: "fgen-image-flight", trigger: flight, start: "top top", end: "bottom bottom", scrub: 0.65, invalidateOnRefresh: true },
+      });
+      art.forEach((image, index) => {
+        const depth = Number(image.dataset.depth);
+        timeline.fromTo(image,
+          { y: () => window.innerHeight * (1.05 + index * 0.16), rotation: index % 2 ? 12 : -12 },
+          { y: () => -window.innerHeight * depth - image.offsetHeight, rotation: index % 2 ? -8 : 7, duration: 3.1 + depth },
+          index * 0.17,
+        );
+      });
+      timeline.fromTo(flight.querySelector(".flight-install"), { yPercent: 105 }, { yPercent: 0, duration: 1.5 }, 3.65);
+      timeline.to({}, { duration: 0.65 });
+      const revealInstall = (event: Event) => {
+        const link = (event.target as Element).closest<HTMLAnchorElement>('a[href$="#install"]');
+        if (!link || !timeline.scrollTrigger) return;
+        const target = new URL(link.href);
+        if (target.pathname !== window.location.pathname) return;
+        event.preventDefault();
+        const end = timeline.scrollTrigger.end;
+        window.scrollTo({ top: end, behavior: "instant" });
+        history.replaceState(null, "", "#install");
+      };
+      document.addEventListener("click", revealInstall);
+      const jumpToInstall = () => {
+        ScrollTrigger.refresh();
+        if (window.location.hash === "#install" && timeline.scrollTrigger) window.scrollTo(0, timeline.scrollTrigger.end);
+      };
+      document.fonts.ready.then(jumpToInstall);
+      return () => {
+        document.removeEventListener("click", revealInstall);
+        flight.classList.remove("is-animated");
+      };
+    });
+  }
+</script>

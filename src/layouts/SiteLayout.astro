@@ -1,0 +1,64 @@
+---
+import "../styles/wtfis.css";
+import SiteNav from "../components/SiteNav.astro";
+
+type Product = "wtf" | "fgen" | "wtfis";
+
+interface Props {
+  title: string;
+  product?: Product;
+}
+
+const { title, product = "wtf" } = Astro.props as Props;
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+const productMeta = {
+  wtf: {
+    label: ">WTF",
+    docs: `${base}docs/`,
+    github: "https://github.com/prophesourvolodymyr/WTFIS",
+  },
+  fgen: {
+    label: "FGEN",
+    docs: `${base}fgen/docs/`,
+    github: "https://github.com/prophesourvolodymyr/fuckinggen",
+  },
+  wtfis: {
+    label: "WTFIS",
+    docs: `${base}docs/`,
+    github: "https://github.com/prophesourvolodymyr/WTFIS",
+  },
+} as const;
+const current = productMeta[product];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1f42f3" />
+    <title>{title}</title>
+    <link rel="icon" type="image/png" href={product === "fgen" ? `${base}assets/fgen/logo.png` : `${base}Tab%20logo.png?v=1`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@800;900&display=swap" rel="stylesheet" />
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
+  </head>
+  <body class={`site-layout site-layout--${product}`}>
+    <div class="unified-grid-layer" aria-hidden="true"></div>
+    <SiteNav product={product} />
+    <slot />
+    <footer class="site-footer" aria-label={`${current.label} footer`}>
+      <div class="footer-mark" aria-hidden="true"><span class="footer-logo-fallback">{current.label}</span></div>
+      <div class="footer-top">
+        <span>{current.label}</span>
+        <nav class="footer-links" aria-label={`${current.label} footer links`}>
+          <a href={current.docs}>docs</a>
+          <a href={current.github} target="_blank" rel="noreferrer">github</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

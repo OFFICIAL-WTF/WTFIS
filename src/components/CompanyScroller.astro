@@ -1,0 +1,61 @@
+---
+const logos = [
+  ["https://upload.wikimedia.org/wikipedia/commons/e/ef/ChatGPT-Logo.svg", "ChatGPT", "company-logo--chatgpt"],
+  ["https://cdn.simpleicons.org/apple/ffffff", "Apple", ""],
+  ["https://cdn.simpleicons.org/googlecloud/ffffff", "Google Cloud", ""],
+  ["https://cdn.simpleicons.org/google/ffffff", "Google", ""],
+  ["https://cdn.simpleicons.org/cloudflare/ffffff", "Cloudflare", ""],
+  ["https://cdn.simpleicons.org/meta/ffffff", "Meta", ""],
+  ["https://cdn.simpleicons.org/nvidia/ffffff", "Nvidia", ""],
+  ["https://cdn.simpleicons.org/broadcom/ffffff", "Broadcom", ""],
+  ["https://cdn.simpleicons.org/github/ffffff", "GitHub", ""],
+  ["https://cdn.simpleicons.org/tesla/ffffff", "Tesla", ""],
+  ["https://cdn.simpleicons.org/samsung/ffffff", "Samsung", ""],
+  ["https://cdn.simpleicons.org/gitlab/ffffff", "GitLab", ""],
+  ["https://cdn.simpleicons.org/bitbucket/ffffff", "Bitbucket", ""],
+  ["https://cdn.simpleicons.org/jira/ffffff", "Jira", ""],
+  ["https://cdn.simpleicons.org/linear/ffffff", "Linear", ""],
+  ["https://cdn.simpleicons.org/cisco/ffffff", "Cisco", ""],
+  ["https://cdn.simpleicons.org/figma/ffffff", "Figma", ""],
+  ["https://cdn.simpleicons.org/intel/ffffff", "Intel", ""],
+  ["https://cdn.simpleicons.org/qualcomm/ffffff", "Qualcomm", ""],
+  ["https://cdn.simpleicons.org/amd/ffffff", "AMD", ""],
+  ["https://cdn.simpleicons.org/notion/ffffff", "Notion", ""],
+  ["https://cdn.simpleicons.org/palantir/ffffff", "Palantir", ""],
+  ["https://cdn.simpleicons.org/netflix/ffffff", "Netflix", ""],
+  ["https://cdn.simpleicons.org/uber/ffffff", "Uber", ""],
+  ["https://cdn.simpleicons.org/spotify/ffffff", "Spotify", ""],
+  ["https://cdn.simpleicons.org/airbnb/ffffff", "Airbnb", ""],
+  ["https://cdn.simpleicons.org/shopify/ffffff", "Shopify", ""],
+  ["https://cdn.simpleicons.org/sap/ffffff", "SAP", ""],
+  ["https://cdn.simpleicons.org/sony/ffffff", "Sony", ""],
+  ["https://cdn.simpleicons.org/xiaomi/ffffff", "Xiaomi", ""],
+  ["https://cdn.simpleicons.org/dropbox/ffffff", "Dropbox", ""],
+  ["https://cdn.simpleicons.org/baidu/ffffff", "Baidu", ""],
+  ["https://cdn.simpleicons.org/tiktok/ffffff", "TikTok", ""],
+  ["https://cdn.simpleicons.org/dell/ffffff", "Dell", ""],
+  ["https://cdn.simpleicons.org/discord/ffffff", "Discord", ""],
+  ["https://cdn.simpleicons.org/hp/ffffff", "HP", ""],
+  ["https://cdn.simpleicons.org/ericsson/ffffff", "Ericsson", ""],
+  ["https://cdn.simpleicons.org/nokia/ffffff", "Nokia", ""],
+  ["https://cdn.simpleicons.org/atlassian/ffffff", "Atlassian", ""],
+  ["https://cdn.simpleicons.org/zoom/ffffff", "Zoom", ""],
+] as const;
+---
+
+<div class="company-scroller" id="company-scroller" aria-label="A moving rail of technology company logos">
+  <div class="company-scroller-viewport">
+    <div class="company-scroller-track" id="company-scroller-track">
+      {logos.map(([src, alt, className]) => (
+        <span class:list={["company-logo", className]}>
+          <img src={src} alt={alt} loading="lazy" decoding="async" />
+        </span>
+      ))}
+      {logos.map(([src, , className]) => (
+        <span class:list={["company-logo", className]} aria-hidden="true">
+          <img src={src} alt="" loading="lazy" decoding="async" />
+        </span>
+      ))}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,513 @@
+---
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+const fgenAsset = (name: string) => `${base}assets/fgen/${name}`;
+---
+
+<section class="fgen-routes" data-fgen-routes data-nav-light aria-labelledby="fgen-routes-title">
+  <div class="fgen-routes-intro">
+    <h2 id="fgen-routes-title">lets fix that problem</h2>
+  </div>
+
+  <div class="fgen-route-stage" data-route-stage>
+    <svg class="fgen-route-lines" data-route-lines aria-hidden="true" focusable="false" viewBox="0 0 1000 1200" preserveAspectRatio="none">
+      <path class="route-path" pathLength="1" data-route-path="agent-cli" d="M300 150 L300 460 L245 650" />
+      <path class="route-path" pathLength="1" data-route-path="agent-tui" d="M300 150 L440 500 L755 650" />
+      <path class="route-path" pathLength="1" data-route-path="you-cli" d="M700 150 L560 500 L245 650" />
+      <path class="route-path" pathLength="1" data-route-path="you-tui" d="M700 150 L700 460 L755 650" />
+      <path class="route-path route-path--lower" pathLength="1" data-route-path="cli-merge" d="M245 900 L245 1000 L500 1060" />
+      <path class="route-path route-path--lower" pathLength="1" data-route-path="tui-merge" d="M755 900 L755 1000 L500 1060" />
+      <path class="route-path route-path--output" pathLength="1" data-route-path="merge-output" d="M500 1060 L500 1140" />
+    </svg>
+
+    <div class="fgen-route-actors" data-route-actors>
+      <div class="fgen-route-node" data-route-node="agent">
+        <img
+          src={fgenAsset("agent-collage.png")}
+          alt="Agent Route"
+          width="320"
+          height="320"
+          decoding="async"
+        />
+        <span class="fgen-route-label">Agent Route</span>
+      </div>
+      <div class="fgen-route-node" data-route-node="you">
+        <img
+          src={fgenAsset("human-cutout.png")}
+          alt="You Route"
+          width="320"
+          height="320"
+          decoding="async"
+        />
+        <span class="fgen-route-label">You Route</span>
+      </div>
+    </div>
+
+    <div class="fgen-route-terminals" data-route-terminals>
+      <article class="terminal-panel fgen-terminal" data-terminal="cli" aria-label="FGEN CLI">
+        <div class="terminal-header">
+          <span class="terminal-lights" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="terminal-name">FGEN CLI</span>
+          <span class="terminal-task">image</span>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-history">
+            <span class="history-command fgen-cli-command" data-cli-command aria-label='$ fgen gen "new idea"'>$ fgen gen &quot;new idea&quot;</span>
+            <span class="history-success fgen-cli-status" data-cli-status>generating...</span>
+            <span class="cli-progress" aria-hidden="true"><span data-cli-progress></span></span>
+            <span class="history-success fgen-cli-result" data-cli-result>~/Downloads/new-idea.png</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="terminal-panel fgen-terminal" data-terminal="tui" aria-label="FGEN TUI">
+        <div class="terminal-header">
+          <span class="terminal-lights" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="terminal-name">FGEN TUI</span>
+          <span class="terminal-task">gallery</span>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-history fgen-tui-history">
+            <span class="history-command fgen-tui-prompt" data-tui-prompt>&gt; new idea</span>
+            <div class="fgen-tui-grid" data-tui-grid>
+              <img src={fgenAsset("hero-generated.webp")} alt="" width="160" height="160" decoding="async" />
+              <img src={fgenAsset("float-01.webp")} alt="" width="160" height="160" decoding="async" />
+              <img src={fgenAsset("float-02.webp")} alt="" width="160" height="160" decoding="async" />
+              <span class="fgen-tui-plus" aria-label="Add image">+</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="fgen-route-output" data-route-output>
+      <figure class="fgen-route-image">
+        <a
+          class="fgen-route-image-link"
+          href="https://commons.wikimedia.org/wiki/File:AI_generated_Art_with_Midjourney.png"
+          target="_blank"
+          rel="noreferrer noopener"
+          title="AI generated Art with Midjourney — George Grigorescu, via Wikimedia Commons, CC BY-SA 4.0"
+          aria-label="Open source image by George Grigorescu on Wikimedia Commons"
+        >
+          <img
+            src={fgenAsset("internet-generated.webp")}
+            alt="Heraldic butterfly with four blue open wings, by George Grigorescu"
+            width="720"
+            height="720"
+            decoding="async"
+          />
+        </a>
+        <figcaption class="fgen-route-attribution">
+          <a
+            href="https://commons.wikimedia.org/wiki/File:AI_generated_Art_with_Midjourney.png"
+            target="_blank"
+            rel="noreferrer noopener"
+          >George Grigorescu · CC BY-SA 4.0</a>
+          <a
+            href={fgenAsset("provenance.json")}
+            target="_blank"
+            rel="noreferrer noopener"
+            aria-label="View image provenance"
+          >↗</a>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .fgen-routes {
+    --fgen-blue: var(--electric-blue, #1f42f3);
+    --fgen-deep: var(--electric-blue-deep, #0b28b6);
+    --fgen-acid: var(--acid, #d4ff45);
+    --fgen-paper: var(--paper, #fbfbf7);
+    position: relative;
+    overflow: clip;
+    padding: clamp(5rem, 10vw, 10rem) var(--edge, clamp(1rem, 2.8vw, 3.5rem)) clamp(7rem, 12vw, 12rem);
+    background: var(--fgen-paper);
+    color: var(--fgen-deep);
+  }
+
+  .fgen-routes-intro {
+    position: relative;
+    z-index: 1;
+    width: min(92rem, 100%);
+    margin: 0 auto clamp(3rem, 7vw, 7rem);
+  }
+
+  .fgen-routes h2 {
+    max-width: 10ch;
+    margin: 0;
+    color: var(--fgen-deep);
+    font-family: "Inter", sans-serif;
+    font-size: clamp(3rem, 10.5vw, 10.5rem);
+    font-weight: 900;
+    letter-spacing: -0.095em;
+    line-height: 0.78;
+    text-wrap: balance;
+  }
+
+  .fgen-route-stage {
+    position: relative;
+    width: min(92rem, 100%);
+    margin: 0 auto;
+    isolation: isolate;
+  }
+
+  .fgen-route-lines {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+  }
+
+  .route-path {
+    fill: none;
+    stroke: var(--fgen-deep);
+    stroke-width: 1.4;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .route-path--lower {
+    stroke: var(--fgen-blue);
+    stroke-width: 1.7;
+  }
+
+  .route-path--output {
+    stroke: var(--fgen-deep);
+    stroke-width: 2;
+  }
+
+  .fgen-route-actors {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(7rem, 12rem));
+    justify-content: center;
+    gap: clamp(2.25rem, 16vw, 16rem);
+    min-height: clamp(12rem, 20vw, 18rem);
+  }
+
+  .fgen-route-node {
+    display: grid;
+    justify-items: center;
+    align-content: start;
+    gap: 0.8rem;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .fgen-route-node img {
+    display: block;
+    width: clamp(5.25rem, 13vw, 12rem);
+    height: clamp(5.25rem, 13vw, 12rem);
+    object-fit: contain;
+  }
+
+  .fgen-route-label {
+    color: var(--fgen-deep);
+    font-size: clamp(0.57rem, 0.75vw, 0.72rem);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .fgen-route-terminals {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(0.8rem, 2.6vw, 2rem);
+    margin-top: clamp(8rem, 13vw, 13rem);
+  }
+
+  .terminal-panel.fgen-terminal {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    min-height: clamp(16rem, 24vw, 22rem);
+    flex-direction: column;
+    overflow: hidden;
+    border: 2px solid rgba(251, 251, 247, 0.9);
+    border-radius: 1rem;
+    background: #0b1d82;
+    box-shadow: 0.55rem 0.6rem 0 rgba(7, 27, 145, 0.58);
+    color: #fbfbf7;
+  }
+
+  .fgen-terminal .terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    min-height: 3.2rem;
+    padding: 0.76rem 0.9rem;
+    border-bottom: 1px solid rgba(251, 251, 247, 0.16);
+  }
+
+  .fgen-terminal .terminal-lights {
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 0.28rem;
+  }
+
+  .fgen-terminal .terminal-lights i {
+    display: block;
+    width: 0.48rem;
+    height: 0.48rem;
+    border-radius: 50%;
+    background: var(--fgen-acid);
+  }
+
+  .fgen-terminal .terminal-lights i:nth-child(2) { opacity: 0.66; }
+  .fgen-terminal .terminal-lights i:nth-child(3) { opacity: 0.35; }
+
+  .fgen-terminal .terminal-name {
+    color: var(--fgen-acid);
+    font-size: clamp(0.58rem, 0.7vw, 0.7rem);
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .fgen-terminal .terminal-task {
+    margin-left: auto;
+    color: rgba(251, 251, 247, 0.5);
+    font-size: 0.53rem;
+    text-align: right;
+  }
+
+  .fgen-terminal .terminal-body {
+    display: flex;
+    min-height: 0;
+    flex: 1;
+    flex-direction: column;
+    padding: 0.95rem 1rem;
+  }
+
+  .fgen-terminal .terminal-history {
+    display: flex;
+    min-height: 0;
+    flex: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.62rem;
+    overflow: hidden;
+    color: rgba(251, 251, 247, 0.66);
+    font-size: clamp(0.68rem, 1vw, 0.9rem);
+    line-height: 1.4;
+  }
+
+  .fgen-terminal .history-command {
+    color: #fbfbf7;
+  }
+
+  .fgen-terminal .history-success {
+    color: var(--fgen-acid);
+  }
+
+  .cli-progress {
+    display: block;
+    width: 100%;
+    height: 0.34rem;
+    overflow: hidden;
+    border: 1px solid rgba(212, 255, 69, 0.56);
+    background: rgba(212, 255, 69, 0.1);
+  }
+
+  .cli-progress > span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--fgen-acid);
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+
+  .fgen-cli-command { min-height: 1.4em; }
+
+  .fgen-cli-result {
+    margin-top: auto;
+    font-family: "Inter", sans-serif;
+    font-size: clamp(0.65rem, 1.1vw, 0.96rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+  }
+
+  .fgen-tui-history {
+    gap: 0.75rem !important;
+  }
+
+  .fgen-tui-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(0.35rem, 0.85vw, 0.68rem);
+    margin-top: 0.4rem;
+    width: min(100%, 18rem);
+    align-self: center;
+  }
+
+  .fgen-tui-grid img,
+  .fgen-tui-plus {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    min-width: 0;
+    object-fit: cover;
+  }
+
+  .fgen-tui-grid img {
+    border: 1px solid rgba(212, 255, 69, 0.52);
+    background: rgba(251, 251, 247, 0.1);
+  }
+
+  .fgen-tui-plus {
+    display: grid;
+    place-items: center;
+    border: 1px dashed rgba(212, 255, 69, 0.7);
+    color: var(--fgen-acid);
+    font-family: "Inter", sans-serif;
+    font-size: clamp(1.6rem, 3.4vw, 3rem);
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .fgen-route-output {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    justify-items: center;
+    margin-top: clamp(10rem, 15vw, 16rem);
+  }
+
+  .fgen-route-image {
+    position: relative;
+    width: min(45vw, 31rem);
+    min-width: 14rem;
+    aspect-ratio: 1;
+    margin: 0;
+    overflow: hidden;
+    border: 2px solid var(--fgen-deep);
+    background: var(--fgen-blue);
+    box-shadow: 0.62rem 0.68rem 0 var(--fgen-deep);
+  }
+
+  .fgen-route-image-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .fgen-route-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .fgen-route-attribution {
+    position: absolute;
+    z-index: 1;
+    right: 0.35rem;
+    bottom: 0.35rem;
+    left: 0.35rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 0.34rem 0.46rem;
+    background: rgba(11, 40, 182, 0.9);
+    color: var(--fgen-paper);
+    font-size: 0.53rem;
+    line-height: 1.2;
+  }
+
+  .fgen-route-attribution a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.15em;
+  }
+
+  .fgen-route-attribution a:last-child {
+    flex: 0 0 auto;
+    font-size: 0.78rem;
+    text-decoration: none;
+  }
+
+  .fgen-route-image-link:focus-visible,
+  .fgen-route-attribution a:focus-visible {
+    outline: 2px solid var(--fgen-acid);
+    outline-offset: -2px;
+  }
+
+  @media (max-width: 720px) {
+    .fgen-routes {
+      padding-top: 4.5rem;
+    }
+
+    .fgen-routes-intro {
+      margin-bottom: 3.4rem;
+    }
+
+    .fgen-route-actors {
+      grid-template-columns: repeat(2, minmax(6rem, 9rem));
+      gap: clamp(1rem, 8vw, 3rem);
+      min-height: 10.5rem;
+    }
+
+    .fgen-route-node img {
+      width: clamp(4.5rem, 22vw, 6.5rem);
+      height: clamp(4.5rem, 22vw, 6.5rem);
+    }
+
+    .fgen-route-terminals {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.6rem;
+      margin-top: 8rem;
+    }
+
+    .terminal-panel.fgen-terminal {
+      min-height: 15.5rem;
+    }
+
+    .fgen-terminal .terminal-header { gap: 0.4rem; padding: 0.65rem 0.5rem; }
+    .fgen-terminal .terminal-name { font-size: 0.58rem; white-space: nowrap; }
+    .fgen-terminal .terminal-task { display: none; }
+    .fgen-terminal .terminal-lights { gap: 0.15rem; }
+    .fgen-terminal .terminal-lights i { width: 0.3rem; height: 0.3rem; }
+    .fgen-terminal .terminal-body { padding: 0.75rem 0.5rem; }
+    .fgen-terminal .terminal-history { font-size: 0.57rem; overflow-wrap: anywhere; }
+    .fgen-cli-result { font-family: "IBM Plex Mono", monospace; font-size: 0.56rem; font-weight: 400; letter-spacing: 0; }
+
+    .fgen-route-output {
+      margin-top: 10rem;
+    }
+
+    .fgen-route-image {
+      width: min(72vw, 24rem);
+      min-width: 12rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fgen-route-lines,
+    .fgen-route-image,
+    .fgen-tui-grid img,
+    .fgen-tui-plus {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import initFgenRoutes from "../scripts/fgen-routes";
+
+  initFgenRoutes();
+</script>

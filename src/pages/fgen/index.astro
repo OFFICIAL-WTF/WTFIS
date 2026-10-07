@@ -1,0 +1,175 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import CompanyScroller from "../../components/CompanyScroller.astro";
+import FgenRoutes from "../../components/FgenRoutes.astro";
+import FgenInstall from "../../components/FgenInstall.astro";
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+const features = [
+  { title: "FGEN TUI", command: "fgen -t", href: "tui" },
+  { title: "--images", command: 'fgen gen "edit this" --images reference.png', href: "references" },
+  { title: "--concurrency", command: 'fgen gen "one" "two" --concurrency 2', href: "batch" },
+  { title: "/history", command: "fgen last -n 5", href: "history" },
+];
+---
+
+<SiteLayout title="FGEN / No need for humans to generate" product="fgen">
+  <main>
+  <section class="hero fgen-hero" id="pain-point" aria-labelledby="fgen-title">
+    <div class="hero-shell">
+      <div class="title-stage">
+        <h1 class="title-lockup" id="fgen-title" aria-label="No need for humans to generate">
+          <span class="title-row">
+            <span class="word"><span class="word-text">No need</span></span>
+            <span class="media-card media-card--image media-card--wide">
+              <span class="media-card__surface"><img class="hero-media-image" src={`${base}assets/fgen/hero-generated.webp`} alt="" width="1024" height="1024" fetchpriority="high" /></span>
+            </span>
+          </span>
+          <span class="title-row">
+            <span class="word"><span class="word-text">for</span></span>
+            <span class="media-card media-card--image media-card--people">
+              <span class="media-card__surface human-surface"><img class="hero-media-image" src={`${base}assets/fgen/human-cutout.png`} alt="" width="1024" height="1024" /></span>
+            </span>
+            <span class="word"><span class="word-text">humans</span></span>
+          </span>
+          <span class="title-row">
+            <span class="word"><span class="word-text">to</span></span>
+            <span class="media-card media-card--image media-card--people">
+              <span class="media-card__surface chatgpt-surface"><img class="hero-media-image" src={`${base}assets/fgen/chatgpt.svg`} alt="" width="100" height="100" /></span>
+            </span>
+            <span class="word"><span class="word-text">generate</span></span>
+          </span>
+        </h1>
+        <CompanyScroller />
+      </div>
+    </div>
+  </section>
+
+  <section class="fgen-quote" aria-label="Satirical OpenAI prompt">
+    <div class="quote-shell terminal-panel">
+      <div class="terminal-header">
+        <span class="terminal-lights" aria-hidden="true"><i></i><i></i><i></i></span>
+        <img class="quote-openai" src={`${base}assets/fgen/chatgpt.svg`} alt="OpenAI" width="26" height="26" />
+      </div>
+      <blockquote>
+        <span class="quote-prompt" aria-hidden="true">&gt;</span>
+        <p>“Lets Not Include <span class="quote-highlight">GPT Image 2.5</span> by default in <span class="quote-oauth">Oauth</span>”<span class="quote-caret" aria-hidden="true"></span></p>
+      </blockquote>
+    </div>
+  </section>
+
+  <FgenRoutes />
+  <FgenInstall />
+
+  <section class="fgen-features install-tray" aria-label="Additional FGEN features" data-nav-light>
+    <div class="fgen-features-inner">
+      <div class="cta-gallery" id="fgen-features">
+        <div class="cta-stack-inner scroll-stack-inner">
+          {features.map((feature) => (
+            <figure class="cta-card scroll-stack-card">
+              <div class="cta-shot fgen-blank-shot" aria-hidden="true"></div>
+              <figcaption>
+                <strong>{feature.title}</strong>
+                <code>{feature.command}</code>
+                <a href={`${base}fgen/docs/#${feature.href}`}>docs ↗</a>
+              </figcaption>
+            </figure>
+          ))}
+          <div class="scroll-stack-end" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fgen-other-project install-tray" aria-label="WTFIS project" data-nav-light>
+    <div class="other-project-inner">
+      <a class="other-project-image" href={`${base}wtfis/`} aria-label="Explore WTFIS">
+        <img src={`${base}WTFIS%20logo%20main.png`} alt="" width="1024" height="1024" loading="lazy" />
+      </a>
+      <div class="install-copy">
+        <h2 class="install-heading">WTFIS</h2>
+        <a class="menu-pill menu-cta" href={`${base}wtfis/`}>try &gt;WTFIS ↗</a>
+      </div>
+    </div>
+  </section>
+  </main>
+</SiteLayout>
+
+<style>
+  .fgen-hero { position: relative; min-height: 100svh; }
+  .fgen-hero .hero-shell { padding-top: 6rem; }
+  .fgen-hero .title-stage { padding-bottom: 9rem; min-height: calc(100svh - 6rem); }
+  .fgen-hero .title-lockup { font-size: clamp(2.7rem, 9.4vw, 9.8rem); }
+  .fgen-hero .title-row { min-height: 0.85em; gap: 0.04em; }
+  .fgen-hero .hero-media-image { object-fit: cover; background: transparent; }
+  .fgen-hero .human-surface { background: var(--acid); }
+  .fgen-hero .human-surface img { object-fit: contain; object-position: center top; }
+  .fgen-hero .chatgpt-surface { background: #0e1020; }
+  .fgen-hero .chatgpt-surface img { padding: 0.08em; object-fit: contain; filter: brightness(0) invert(1); }
+  .fgen-quote { position: relative; z-index: 1; min-height: 95svh; display: grid; place-items: center; padding: 7rem var(--edge); }
+  .quote-shell { width: min(100%, 72rem); min-height: 0; overflow: visible; border: 2px solid rgba(251,251,247,0.8); border-radius: 1.2rem; background: #0b1d82; box-shadow: 0.8rem 0.9rem 0 rgba(7,27,145,0.55); transform: rotate(-2deg); }
+  .quote-shell .terminal-header { min-height: 3.6rem; padding: 1rem 1.4rem; }
+  .quote-openai { margin-left: auto; object-fit: contain; filter: brightness(0) invert(1); }
+  blockquote { margin: 0; padding: clamp(1.5rem, 5vw, 4.5rem); display: flex; align-items: start; gap: clamp(0.8rem, 2vw, 2rem); }
+  blockquote p { margin: 0; font-family: "Inter", sans-serif; font-size: clamp(2rem, 5.7vw, 5.8rem); font-weight: 900; letter-spacing: -0.065em; line-height: 1.05; }
+  .quote-prompt { color: var(--acid); font-size: clamp(2rem, 5vw, 5rem); line-height: 1; }
+  .quote-highlight { color: var(--acid); }
+  .quote-oauth { display: inline-block; text-decoration: underline wavy var(--acid) 2px; text-underline-offset: 0.14em; }
+  .quote-caret { display: inline-block; height: 0.85em; width: 0.09em; margin-left: 0.1em; background: var(--acid); vertical-align: -0.04em; }
+  .fgen-features { padding: 4rem 0 0; }
+  .fgen-features-inner { width: min(calc(100% - 2 * var(--edge)), 82rem); margin: 0 auto; }
+  .fgen-blank-shot { background: #fbfbf7; border-color: #fbfbf7; box-shadow: none; }
+  .fgen-blank-shot::before, .fgen-blank-shot::after { display: none; }
+  .fgen-features figcaption { gap: 1rem; }
+  .fgen-features figcaption code { overflow-wrap: anywhere; }
+  .fgen-features figcaption a { justify-self: start; padding: 0.5rem 0; text-underline-offset: 0.3em; }
+  .fgen-features figcaption a:focus-visible { outline: 2px solid var(--acid); outline-offset: 4px; }
+  .fgen-other-project { padding: 2rem var(--edge) 8rem; }
+  .other-project-inner { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 5vw; width: min(100%, 70rem); margin: 0 auto; border-top: 1px solid rgba(16,39,133,0.2); padding-top: 5rem; }
+  .other-project-image { display: block; width: min(100%, 26rem); justify-self: center; }
+  .other-project-image img { display: block; width: 100%; height: auto; }
+  .other-project-image:focus-visible { outline: 2px solid var(--electric-blue); outline-offset: 4px; }
+  .fgen-other-project .install-copy { grid-area: auto; gap: 2rem; }
+  .fgen-other-project .menu-cta { justify-self: start; }
+  @media (max-width: 760px) {
+    .fgen-hero .title-lockup { font-size: clamp(2.3rem, 11vw, 4.8rem); }
+    .fgen-hero .title-row { min-height: 1em; }
+    .fgen-hero .title-stage { padding-bottom: 8rem; }
+    .fgen-quote { min-height: 75svh; padding: 5rem 1.25rem; }
+    .quote-shell { transform: rotate(-1deg); border-radius: 0.8rem; }
+    blockquote { padding: 1.6rem 1rem 2rem; gap: 0.6rem; }
+    blockquote p { font-size: clamp(1.9rem, 7vw, 3.5rem); }
+    .quote-prompt { font-size: 2rem; }
+    .fgen-features figcaption { justify-items: center; }
+    .fgen-features figcaption a { justify-self: center; }
+    .other-project-inner { grid-template-columns: 1fr; gap: 2rem; padding-top: 2rem; }
+    .other-project-image { width: min(60%, 16rem); }
+    .fgen-other-project .install-copy { justify-items: center; }
+    .fgen-other-project .menu-cta { justify-self: center; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .quote-shell { transform: none; }
+    .fgen-features .scroll-stack-card { position: relative; top: auto; margin-bottom: 2rem; }
+    .fgen-features .cta-stack-inner { padding-bottom: 2rem; }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+  const media = gsap.matchMedia();
+  media.add("(prefers-reduced-motion: no-preference)", () => {
+    gsap.from(".fgen-hero .title-row", { y: 45, opacity: 0, duration: 0.8, stagger: 0.12, ease: "power3.out", clearProps: "transform,opacity" });
+    gsap.fromTo(".quote-shell", { rotation: -4, y: 65 }, {
+      rotation: 1, y: -20, ease: "none",
+      scrollTrigger: { trigger: ".fgen-quote", start: "top 85%", end: "bottom 20%", scrub: 0.5 },
+    });
+    const cards = gsap.utils.toArray<HTMLElement>(".fgen-features .scroll-stack-card");
+    cards.slice(0, -1).forEach((card, index) => {
+      gsap.to(card, {
+        scale: 0.91 + index * 0.025, ease: "none",
+        scrollTrigger: { trigger: cards[index + 1], start: "top 80%", end: "top 18%", scrub: true },
+      });
+    });
+  });
+</script>

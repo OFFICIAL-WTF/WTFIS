@@ -171,6 +171,24 @@ cargo test
 cargo run -- my-project
 ```
 
+### Website
+
+The Astro site is the WTF project hub. Its GitHub Pages base remains `/WTFIS/`:
+
+- `/WTFIS/` — WTF projects.
+- `/WTFIS/fgen/` and `/WTFIS/fgen/docs/` — FGEN showcase and command documentation.
+- `/WTFIS/wtfis/` and `/WTFIS/docs/` — preserved WTFIS showcase and documentation.
+
+```bash
+npm ci
+npm run dev
+npm run build
+```
+
+Shared visual styles and navigation live in `src/styles/`, `src/components/`, and `src/layouts/`. FGEN installation commands are shared between its landing page and docs through `src/data/fgen-install.ts`. The scroll stories respect reduced motion and leave their content available without JavaScript.
+
+Generated-image prompts and source licenses are recorded in `public/assets/fgen/provenance.json`. The final route image is George Grigorescu's Midjourney artwork from Wikimedia Commons, used under CC BY-SA 4.0; it is not an FGEN output.
+
 ## License
 
 WTFPL

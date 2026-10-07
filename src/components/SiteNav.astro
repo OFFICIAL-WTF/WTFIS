@@ -1,0 +1,84 @@
+---
+type Product = "wtf" | "fgen" | "wtfis";
+
+interface Props {
+  product?: Product;
+}
+
+const { product = "wtf" } = Astro.props as Props;
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+const productMeta = {
+  wtf: {
+    label: ">WTF",
+    home: base,
+    docs: `${base}docs/`,
+    github: "https://github.com/prophesourvolodymyr/WTFIS",
+  },
+  fgen: {
+    label: "FGEN",
+    home: `${base}fgen/`,
+    docs: `${base}fgen/docs/`,
+    github: "https://github.com/prophesourvolodymyr/fuckinggen",
+  },
+  wtfis: {
+    label: "WTFIS",
+    home: `${base}wtfis/`,
+    docs: `${base}docs/`,
+    github: "https://github.com/prophesourvolodymyr/WTFIS",
+  },
+} as const;
+const current = productMeta[product];
+---
+
+<nav class="top-nav site-nav" aria-label={`${current.label} navigation`}>
+  <a class="menu-brand site-nav-brand" href={current.home} aria-label={`${current.label} home`}>
+    {product === "fgen" ? (
+      <img src={`${base}assets/fgen/logo.png`} alt="FGEN" width="512" height="512" />
+    ) : product === "wtfis" ? (
+      <img src={`${base}WTFIS%20logo%20main.png`} alt="WTFIS" width="1024" height="1024" />
+    ) : (
+      <span class="site-nav-wordmark" aria-hidden="true">&gt;WTF</span>
+    )}
+  </a>
+  <div class="menu-links site-nav-links">
+    {product !== "wtf" && <a class="menu-pill" href={base}>&gt;WTF</a>}
+    {product !== "wtfis" && <a class="menu-pill" href={`${base}wtfis/`}>WTFIS</a>}
+    {product !== "fgen" && <a class="menu-pill" href={`${base}fgen/`}>FGEN</a>}
+    <a class="menu-pill" href={current.docs}>docs</a>
+    <a class="menu-pill" href={current.github} target="_blank" rel="noreferrer">github</a>
+    <a class="menu-pill menu-cta" href={product === "wtf" ? `${base}#projects` : product === "fgen" ? `${base}fgen/#install` : current.home}>{product === "wtf" ? "projects" : current.label}</a>
+  </div>
+</nav>
+
+<style>
+  :global(html:not(.js)) .site-nav { background: var(--electric-blue-deep); }
+  @media (max-width: 420px) {
+    .site-nav-links > a[target="_blank"] { display: none; }
+  }
+  @media (max-width: 360px) {
+    .site-nav-wordmark { font-size: 1.5rem; }
+  }
+</style>
+
+<script>
+  const nav = document.querySelector<HTMLElement>(".site-nav");
+  const lightSections = document.querySelectorAll<HTMLElement>("[data-nav-light]");
+  if (nav && lightSections.length) {
+    let observer: IntersectionObserver;
+    const watchNavigationSurface = () => {
+      observer?.disconnect();
+      const active = new Set<Element>();
+      const edge = Math.ceil(nav.getBoundingClientRect().bottom);
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) active.add(entry.target);
+          else active.delete(entry.target);
+        });
+        nav.classList.toggle("is-on-light", active.size > 0);
+      }, { rootMargin: `-${edge}px 0px -${Math.max(0, window.innerHeight - edge - 1)}px 0px` });
+      lightSections.forEach((section) => observer.observe(section));
+    };
+    watchNavigationSurface();
+    window.addEventListener("resize", watchNavigationSurface, { passive: true });
+  }
+</script>

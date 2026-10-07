@@ -1,0 +1,271 @@
+---
+import "../../styles/docs.css";
+import { fgenInstall, fgenReleases } from "../../data/fgen-install";
+
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1f42f3" />
+    <title>FGEN / Documentation</title>
+    <link rel="icon" type="image/png" href={`${base}assets/fgen/logo.png`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@800;900&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="docs-grid" aria-hidden="true"></div>
+
+    <header class="docs-nav">
+      <a class="docs-brand docs-brand--fgen" href={`${base}fgen/`} aria-label="FGEN home">
+        <img src={`${base}assets/fgen/logo.png`} alt="FGEN" width="512" height="512" />
+      </a>
+      <nav class="docs-nav-links" aria-label="FGEN documentation navigation">
+        <a href={base}>&gt;WTF</a>
+        <a href={`${base}fgen/`}>home</a>
+        <a href={`${base}wtfis/`}>WTFIS</a>
+        <a href={`${base}fgen/#install`}>install</a>
+        <a href="https://github.com/prophesourvolodymyr/fuckinggen" target="_blank" rel="noreferrer">github</a>
+      </nav>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-sidebar" aria-label="FGEN documentation sections">
+        <p class="sidebar-label">On this page</p>
+        <nav class="sidebar-links">
+          <a href="#overview">Overview</a>
+          <a href="#install">Install</a>
+          <a href="#auth">Auth</a>
+          <a href="#usage">CLI usage</a>
+          <a href="#batch">Batch jobs</a>
+          <a href="#references">References and edits</a>
+          <a href="#json">JSON output</a>
+          <a href="#tui">TUI</a>
+          <a href="#history">History and cache</a>
+          <a href="#configuration">Configuration</a>
+          <a href="#agent-skill">Agent skill</a>
+        </nav>
+      </aside>
+
+      <main class="docs-main">
+        <section class="docs-section" id="overview">
+          <p class="docs-kicker">Terminal image generation / CLI + TUI</p>
+          <h1 class="docs-title">FGEN<br />HELP.</h1>
+          <p class="docs-lede">
+            Generate images from your own ChatGPT subscription, straight from the terminal. <code>fgen</code> and <code>fuckinggen</code> are the same program, with a CLI and a real TUI.
+          </p>
+
+          <div class="terminal-preview" aria-label="FGEN help terminal preview">
+            <div class="terminal-bar">
+              <span class="terminal-dot"></span>
+              <span class="terminal-dot"></span>
+              <span class="terminal-dot"></span>
+              <span>fgen / help</span>
+            </div>
+            <pre><span class="terminal-command">$ fgen gen "a red square on white"</span>
+→ ~/Downloads/a-red-square-on-white.png
+
+<span class="terminal-command">$ fgen -t</span>
+Interactive prompt, references, image grid, history, and save checklist.</pre>
+          </div>
+
+          <div class="docs-inline-links" aria-label="FGEN quick links">
+            <a href="#install">Install</a>
+            <a href="#auth">Authenticate</a>
+            <a href="#tui">Open the TUI</a>
+            <a href={fgenReleases} target="_blank" rel="noreferrer">Latest releases</a>
+          </div>
+        </section>
+
+        <section class="docs-section" id="install">
+          <h2 class="section-heading"><span class="section-number">01</span>Install</h2>
+          <p class="section-copy">Install the published binary for your platform, then run <code>fgen auth</code>. The release archives contain both <code>fgen</code> and <code>fuckinggen</code>, which invoke the same CLI.</p>
+          <div class="docs-install-grid">
+            {fgenInstall.map((item) => (
+              <section class="docs-install-card" aria-labelledby={`install-${item.id}`}>
+                <h3 id={`install-${item.id}`}>
+                  <img src={`${base}${item.icon}`} alt="" width="18" height="18" loading="lazy" />
+                  {item.label}
+                </h3>
+                {item.id === "macos" && <p>Homebrew is the supported package-manager path. Manual Apple silicon and Intel archives are available from the latest release.</p>}
+                {item.id === "linux" && <p>Arch users can install the AUR package. Linux users can also use Homebrew or build from source; the current release page does not publish a Linux archive.</p>}
+                {item.id === "windows" && <p>Download the latest x86_64 Windows GNU zip, extract it to a permanent folder, and add that folder to your user <code>PATH</code>.</p>}
+                {item.id === "source" && <p>Build and install with Cargo when a package or release archive is not the right fit.</p>}
+                <pre class="code-block"><button class="copy-code" type="button" data-copy={item.command}>copy</button>{item.command}</pre>
+              </section>
+            ))}
+          </div>
+          <p class="docs-note">Existing files are never overwritten: a requested name becomes <code>thing-v2.png</code>, then <code>thing-v3.png</code>, and so on.</p>
+        </section>
+
+        <section class="docs-section" id="auth">
+          <h2 class="section-heading"><span class="section-number">02</span>Auth</h2>
+          <p class="section-copy"><code>fgen</code> reads the ChatGPT OAuth token already stored by Codex. It does not ask for or use an OpenAI API key, and it does not log in to a separate service.</p>
+          <pre class="code-block"><button class="copy-code" type="button" data-copy={'codex login\nfgen auth'}>copy</button>codex login
+fgen auth</pre>
+          <p class="section-copy">Run <code>fgen auth</code> to see token, account, and expiry status. If the status is invalid, log in with <code>codex login</code> and check again.</p>
+        </section>
+
+        <section class="docs-section" id="usage">
+          <h2 class="section-heading"><span class="section-number">03</span>CLI usage</h2>
+          <p class="section-copy">Positional prompts and <code>--prompt</code> are both accepted. A single prompt writes to <code>~/Downloads</code> by default; use <code>--out</code> or <code>--out-dir</code> to choose the destination.</p>
+          <pre class="code-block"><button class="copy-code" type="button" data-copy={'fgen gen "a red square on white"\nfgen gen "poster" --out ~/Desktop/poster.png\nfgen gen "prompt" --quality high\nfgen last -n 5\nfgen --help'}>copy</button>fgen gen "a red square on white"
+fgen gen "poster" --out ~/Desktop/poster.png
+fgen gen "prompt" --quality high
+fgen last -n 5
+fgen --help</pre>
+          <table class="command-table">
+            <thead><tr><th>Command</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td><code>fgen gen [PROMPT...]</code></td><td>Generate one or more images.</td></tr>
+              <tr><td><code>fgen tui</code></td><td>Open the interactive terminal interface. <code>fgen -t</code> is the short form.</td></tr>
+              <tr><td><code>fgen last -n N</code></td><td>List recent generations, newest first.</td></tr>
+              <tr><td><code>fgen auth</code></td><td>Show the status of the existing ChatGPT OAuth credential.</td></tr>
+              <tr><td><code>--out PATH</code></td><td>Save one prompt to an exact path, or use a directory to keep the prompt-derived filename.</td></tr>
+              <tr><td><code>--out-dir DIR</code></td><td>Save generated files in a chosen directory.</td></tr>
+              <tr><td><code>--quality Q</code></td><td>Request <code>low</code>, <code>medium</code>, <code>high</code>, or <code>auto</code> quality.</td></tr>
+              <tr><td><code>--size auto|WxH</code></td><td>Request dimensions; the backend may choose the final dimensions.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="docs-section" id="batch">
+          <h2 class="section-heading"><span class="section-number">04</span>Batch jobs</h2>
+          <p class="section-copy">Pass multiple prompts to one <code>gen</code> command. <code>--concurrency</code> controls how many jobs run at once, while <code>--out-dir</code> keeps the outputs together.</p>
+          <pre class="code-block"><button class="copy-code" type="button" data-copy={'fgen gen "poster A" "poster B" --out-dir ./assets --concurrency 2'}>copy</button>fgen gen "poster A" "poster B" --out-dir ./assets --concurrency 2</pre>
+          <p class="section-copy">Progress reports each job and prints the resulting path. Add <code>--json</code> when another process should consume structured events instead of terminal prose.</p>
+        </section>
+
+        <section class="docs-section" id="references">
+          <h2 class="section-heading"><span class="section-number">05</span>References and edits</h2>
+          <p class="section-copy">Use <code>--images</code> (or repeat <code>--image</code>) to attach one or more local PNG, JPEG, WebP, or GIF references to every prompt. Use <code>--last</code> to attach a recent generation without finding its path.</p>
+          <pre class="code-block"><button class="copy-code" type="button" data-copy={'fgen gen "recolor the square to blue" --images red-square.png --out blue.png\nfgen gen "make it blue" --last\nfgen gen "keep going" --last 2'}>copy</button>fgen gen "recolor the square to blue" --images red-square.png --out blue.png
+fgen gen "make it blue" --last
+fgen gen "keep going" --last 2</pre>
+          <p class="docs-note">Reference files are sent with the generation request. Follow-up edits keep the selected image in context; use a fresh prompt when you do not want that image attached.</p>
+        </section>
+
+        <section class="docs-section" id="json">
+          <h2 class="section-heading"><span class="section-number">06</span>JSON output</h2>
+          <p class="section-copy">Machine-readable mode writes JSON Lines progress events for agents and scripts. Events include the start, generation phase, saved path and final summary.</p>
+          <pre class="code-block"><button class="copy-code" type="button" data-copy={'fgen gen "hero shot" --json'}>copy</button>fgen gen "hero shot" --json</pre>
+          <div class="terminal-preview" aria-label="FGEN JSON output preview">
+            <pre>{`{"event":"start",...}
+{"event":"phase","phase":"generating",...}
+{"event":"saved","path":"/…/hero-shot.png","bytes":912344,...}
+{"event":"summary","ok":true,...}`}</pre>
+          </div>
+        </section>
+
+        <section class="docs-section" id="tui">
+          <h2 class="section-heading"><span class="section-number">07</span>Rich TUI</h2>
+          <p class="section-copy">Open <code>fgen tui</code> or <code>fgen -t</code> for a prompt bar, references strip, square image grid, history, save checklist and command palette.</p>
+          <div class="info-grid">
+            <article class="info-card"><h3>Prompt and refs.</h3><p>Press Enter to generate. Shift+Enter adds a line. Drag or paste image paths to attach references; a path never starts a generation accidentally.</p></article>
+            <article class="info-card"><h3>Grid and controls.</h3><p>Generations occupy square cells. Up enters the grid, left and right walk it, and Down loads the selected prompt back into the prompt bar.</p></article>
+            <article class="info-card"><h3>Image actions.</h3><p>Keep, remove, regenerate, cut out the background, copy the prompt, or begin a fresh prompt from the selected image.</p></article>
+            <article class="info-card"><h3>Commands.</h3><p>Type <code>/</code> for the palette. Useful commands include <code>/open</code>, <code>/view</code>, <code>/save</code>, <code>/history</code>, <code>/ctx</code>, <code>/settings</code>, and <code>/help</code>.</p></article>
+          </div>
+          <p class="section-copy">The first run includes a four-page tour; <code>/guide</code> opens it again. The terminal title reflects the prompt, active rendering, or keep checklist.</p>
+        </section>
+
+        <section class="docs-section" id="history">
+          <h2 class="section-heading"><span class="section-number">08</span>History and cache</h2>
+          <p class="section-copy">Finished generations are remembered newest first, capped at 50, in <code>~/.local/state/fuckinggen/state.json</code>. That state powers <code>--last</code> and <code>fgen last</code>.</p>
+          <p class="section-copy">The TUI stages output in a scratch cache and starts empty. Unkept files are removed after 24 hours, so a session does not silently become a permanent image archive.</p>
+          <pre class="code-block"><button class="copy-code" type="button" data-copy={'ctrl-c        # open the keep/discard checklist\nctrl-c ctrl-c # quit and leave staged files in the cache\nenter         # keep the selected gallery image'}>copy</button>ctrl-c        # open the keep/discard checklist
+ctrl-c ctrl-c # quit and leave staged files in the cache
+enter         # keep the selected gallery image</pre>
+          <p class="section-copy">Tick images with Space and press Enter to save them to the current directory (or <code>~/Downloads</code> after <code>/root</code>). Unticked images are deleted. Existing files use never-overwrite naming.</p>
+        </section>
+
+        <section class="docs-section" id="configuration">
+          <h2 class="section-heading"><span class="section-number">09</span>Configuration</h2>
+          <p class="section-copy">The TUI settings command cycles the theme, quality and login flow. The default save directory can also come from <code>FUCKINGGEN_OUT_DIR</code>; the CLI quality and size flags remain per-command requests.</p>
+          <pre class="code-block"><button class="copy-code" type="button" data-copy={'fgen gen "prompt" --quality low\nfgen gen "prompt" --size 1024x1024\nFUCKINGGEN_OUT_DIR=./images fgen gen "prompt"'}>copy</button>fgen gen "prompt" --quality low
+fgen gen "prompt" --size 1024x1024
+FUCKINGGEN_OUT_DIR=./images fgen gen "prompt"</pre>
+          <p class="docs-note">Quality and size are requests to the backend. The backend may choose final dimensions.</p>
+        </section>
+
+        <section class="docs-section" id="agent-skill">
+          <h2 class="section-heading"><span class="section-number">10</span>Agent skill</h2>
+          <p class="section-copy">The repository ships <code>gpt-image-gen-latest</code>, an agent skill that teaches an agent when and how to call <code>fgen</code> for text-to-image, reference edits, follow-ups, batch jobs, progress and TUI work.</p>
+          <pre class="code-block"><button class="copy-code" type="button" data-copy={'./install.sh\nsudo bash /usr/share/fgen/install.sh --skills-only\nbash "$(brew --prefix fuckinggen)/share/fgen/install.sh" --skills-only'}>copy</button>./install.sh
+sudo bash /usr/share/fgen/install.sh --skills-only
+bash "$(brew --prefix fuckinggen)/share/fgen/install.sh" --skills-only</pre>
+          <p class="section-copy">The repository installer builds and installs both binaries, then copies the skill into detected agent skill directories. Package installs can use <code>--skills-only</code>: AUR ships it under <code>/usr/share/fgen</code>, and Homebrew ships it under its share directory. On Windows, copy <code>skills\gpt-image-gen-latest</code> from the release zip into your agent's skills folder; the installer script is Bash-only.</p>
+        </section>
+      </main>
+    </div>
+
+    <footer class="docs-footer">
+      <strong>FGEN</strong>
+      <nav class="docs-nav-links" aria-label="FGEN documentation footer links">
+        <a href={`${base}fgen/`}>home</a>
+        <a href={fgenReleases} target="_blank" rel="noreferrer">releases</a>
+        <a href="https://github.com/prophesourvolodymyr/fuckinggen" target="_blank" rel="noreferrer">github</a>
+      </nav>
+    </footer>
+
+    <script>
+      (() => {
+        const contentsLinks = [...document.querySelectorAll<HTMLAnchorElement>('.sidebar-links a[href^="#"]')];
+        const contentsSections = contentsLinks
+          .map((link) => document.querySelector<HTMLElement>(link.hash))
+          .filter((section): section is HTMLElement => section !== null);
+
+        if (contentsSections.length) {
+          let contentsFrame = 0;
+          const updateContentsIndicator = () => {
+            contentsFrame = 0;
+            const marker = window.innerHeight * 0.32;
+            let activeSection = contentsSections[0];
+            contentsSections.forEach((section) => {
+              if (section.getBoundingClientRect().top <= marker) activeSection = section;
+            });
+            contentsLinks.forEach((link) => {
+              const isActive = link.hash === `#${activeSection.id}`;
+              link.classList.toggle("is-active", isActive);
+              if (isActive) link.setAttribute("aria-current", "location");
+              else link.removeAttribute("aria-current");
+            });
+          };
+          const requestContentsUpdate = () => {
+            if (contentsFrame) return;
+            contentsFrame = window.requestAnimationFrame(updateContentsIndicator);
+          };
+          window.addEventListener("scroll", requestContentsUpdate, { passive: true });
+          window.addEventListener("resize", requestContentsUpdate, { passive: true });
+          updateContentsIndicator();
+        }
+
+        document.querySelectorAll<HTMLButtonElement>("[data-copy]").forEach((button) => {
+          button.addEventListener("click", async () => {
+            const value = button.dataset.copy ?? "";
+            const label = button.textContent;
+            try {
+              await navigator.clipboard.writeText(value);
+              button.textContent = "copied";
+            } catch {
+              const block = button.parentElement;
+              if (block) {
+                const range = document.createRange();
+                range.setStartAfter(button);
+                range.setEnd(block, block.childNodes.length);
+                window.getSelection()?.removeAllRanges();
+                window.getSelection()?.addRange(range);
+              }
+              button.textContent = "selected";
+            }
+            window.setTimeout(() => { button.textContent = label; }, 1400);
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
