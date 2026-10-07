@@ -9,16 +9,22 @@
   },
   "assets": {
     "logo.png": {
-      "kind": "fgen-generated-transparent-cutout",
+      "kind": "fgen-generated-original-transparent",
+      "generatedAt": "2026-10-07",
       "dimensions": "768x384",
       "format": "PNG RGBA",
-      "bytes": 106820,
-      "sha256": "6e8438b81ea9f75d1e2d5cc220c95e155ee5d01378bcecdff078b5f8743da48f",
-      "prompt": "Create one original raster brand logo for WTF, an irreverent family of open-source terminal tools. An exceptionally clear compact interlocking WTF monogram, exact uppercase letters W T F, with a small terminal chevron integrated into the W and one acid-lime square cursor tucked beside the F. Strong chunky geometric white faces, deep cobalt blue #0b28b6 extruded side edges, one tiny acid lime #d4ff45 accent. Confident playful brutalist software identity, bold silhouette, crisp vector-like edges, very simple readable geometry. Straight-on with only a subtle dimensional extrusion, not tilted. Standalone die-cut mark centered with generous clear space. TRUE transparent PNG alpha outside the mark, not a checkerboard or opaque background. No enclosing badge, no app icon tile, no subtitle, no slogan, no decorative objects, no mockup. The only lettering is WTF. It must read clearly at 64 pixels on an electric blue #1f42f3 website.",
-      "command": "fgen gen <prompt> --out public/assets/wtf/logo.png --quality high --size 1024x1024 --timeout 300 --json",
-      "generationEvidence": "FGEN saved 497191 bytes; original source was 1774x887 RGBA.",
-      "sourceSha256": "543d1109d0004f016980def9c583800043b26ebea17753978fee8c8827bcad48",
-      "alpha": "verified: min 0, max 255 after resizing"
+      "bytes": 75899,
+      "sha256": "bbc13cc6639fd46d8ec2de089fa550ee59f8d07e9652e7ba656544b9215b7df0",
+      "sourceDimensions": "1774x887",
+      "sourceFormat": "PNG RGBA",
+      "sourceBytes": 157786,
+      "sourceSha256": "721588174061c4670f3d2f0e537ec284fc2cf2b3210d6054f2d477e4c4b97bb2",
+      "prompt": "Create one original minimalist raster logo for a rebellious open-source terminal tools brand: a clean, flat, compact geometric white wordmark reading exactly WTF in uppercase, with all three letters clearly readable and tightly balanced on one horizontal line. Add exactly one tiny acid-lime square full stop immediately after the F. Solid white and acid-lime fills only, crisp vector-like edges, generous modest transparent padding, strong silhouette at tiny navigation size and hero scale. True transparent PNG alpha around the mark, no background and no checkerboard. Absolutely no extrusion, bevel, 3D perspective, outline, shadow, shine, texture, illustrative extras, terminal icon, chevron, cursor, mockup, paper, device, UI, caption, other letters, or watermark. Front-facing, simple geometric brand mark, not a font specimen.",
+      "command": "fgen gen <prompt> --out /tmp/wtf-fgen-wtf-logo-source.png --quality high --size 1024x1024 --timeout 600 --json",
+      "generationEvidence": "fgen JSON saved event: job 0, bytes 157786, path /tmp/wtf-fgen-wtf-logo-source.png, elapsed 23672ms; summary ok=true. No generation event ID was provided. Source inspected as 1774x887 PNG RGBA.",
+      "sourceAlpha": "verified source alpha extrema 0..255",
+      "alpha": "verified delivered alpha extrema 0..255; 233769 fully transparent pixels; alpha bbox 59,102 to 709,281",
+      "optimization": "Removed generation-noise pixels below alpha 32, cropped to meaningful alpha with 32px source padding, resized with Pillow LANCZOS to a 700x229 aspect-preserving mark layer, and centered it on a transparent 768x384 RGBA canvas."
     },
     "fgit-logo.png": {
       "kind": "fgen-generated-transparent-cutout",
