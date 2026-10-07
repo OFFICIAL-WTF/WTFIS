@@ -187,6 +187,10 @@ npm run build
 
 Shared visual styles and navigation live in `src/styles/`, `src/components/`, and `src/layouts/`. FGEN installation commands are shared between its landing page and docs through `src/data/fgen-install.ts`. The scroll stories respect reduced motion and leave their content available without JavaScript.
 
+FGEN uses the original WTFIS hero typography, entrance timing, pointer response, and shared notification bubbles. The quote reveals word by word in normal page flow, without a sticky hold, with one Sam Altman sticker and an OpenAI signature. Rounded route lines connect Agent to CLI and Human to TUI, then merge into the output image.
+
+Floating images enter beside that output and stay clustered through a long scrolling gallery. The installation panel slides over the gallery with outlined, rounded top corners. Platform icons select the macOS, Linux, Windows, or source command and support arrow keys, Home, and End. Both product menus link to the WTF hub and the other project.
+
 Generated-image prompts and source licenses are recorded in `public/assets/fgen/provenance.json`. The final route image is George Grigorescu's Midjourney artwork from Wikimedia Commons, used under CC BY-SA 4.0; it is not an FGEN output.
 
 ## License

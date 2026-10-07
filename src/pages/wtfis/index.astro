@@ -1,6 +1,7 @@
 ---
 import "../../styles/wtfis.css";
 import CompanyScroller from "../../components/CompanyScroller.astro";
+import HeroNotifications from "../../components/HeroNotifications.astro";
 const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
 ---
 
@@ -36,11 +37,13 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
     </div>
     <div class="cursor-mask" aria-hidden="true"></div>
     <div class="unified-grid-layer" aria-hidden="true"></div>
-    <nav class="top-nav" aria-label="WTFIS showcase navigation">
+    <nav class="top-nav wtfis-nav" aria-label="WTFIS showcase navigation">
       <a class="menu-brand" href="#pain-point" aria-label="WTFIS home">
         <img src={`${base}WTFIS%20logo%20main.png`} alt="" width="1024" height="1024" />
       </a>
       <div class="menu-links">
+        <a class="menu-pill" href={base}>&gt;WTF</a>
+        <a class="menu-pill" href={`${base}fgen/`}>FGEN</a>
         <a class="menu-pill" href={`${base}docs/`}>docs</a>
         <a class="menu-pill" href="https://github.com/prophesourvolodymyr/WTFIS" target="_blank" rel="noreferrer">github</a>
         <a class="menu-pill menu-coffee" href="https://buymeacoffee.com/professorvolodymyr" target="_blank" rel="noreferrer" aria-label="Support WTFIS">☕️</a>
@@ -52,24 +55,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
         <div class="transition-frame">
           <section class="hero" id="pain-point" aria-labelledby="pain-point-title">
             <div class="hero-shell">
-        <aside class="notification-layer" aria-label="Common directory search habits">
-          <div class="notification notice--one notice--left">
-            <span class="status-dot" aria-hidden="true"></span>
-            <span>Without starting a project?</span>
-          </div>
-          <div class="notification notice--two notice--right">
-            <span class="status-dot" aria-hidden="true"></span>
-            <span>Opening a bunch of windows?</span>
-          </div>
-          <div class="notification notice--three notice--left">
-            <span class="status-dot" aria-hidden="true"></span>
-            <span>Copy-pasting paths?</span>
-          </div>
-          <div class="notification notice--four notice--right">
-            <span class="status-dot" aria-hidden="true"></span>
-            <span>Searching the same folders again?</span>
-          </div>
-        </aside>
+        <HeroNotifications />
 
         <main class="title-stage">
           <h1

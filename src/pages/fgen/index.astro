@@ -1,6 +1,7 @@
 ---
 import SiteLayout from "../../layouts/SiteLayout.astro";
 import CompanyScroller from "../../components/CompanyScroller.astro";
+import HeroNotifications from "../../components/HeroNotifications.astro";
 import FgenRoutes from "../../components/FgenRoutes.astro";
 import FgenInstall from "../../components/FgenInstall.astro";
 const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
@@ -12,31 +13,33 @@ const features = [
 ];
 ---
 
-<SiteLayout title="FGEN / No need for humans to generate" product="fgen">
+<SiteLayout title="FGEN / No Need For Humans To Generate" product="fgen">
   <main>
   <section class="hero fgen-hero" id="pain-point" aria-labelledby="fgen-title">
     <div class="hero-shell">
+      <HeroNotifications />
       <div class="title-stage">
-        <h1 class="title-lockup" id="fgen-title" aria-label="No need for humans to generate">
+        <h1 class="title-lockup" id="fgen-title" aria-label="No Need For Humans To Generate">
           <span class="title-row">
-            <span class="word"><span class="word-text">No need</span></span>
+            <span class="word"><span class="word-text">No</span></span>
+            <span class="word"><span class="word-text">Need</span></span>
             <span class="media-card media-card--image media-card--wide">
               <span class="media-card__surface"><img class="hero-media-image" src={`${base}assets/fgen/hero-generated.webp`} alt="" width="1024" height="1024" fetchpriority="high" /></span>
             </span>
           </span>
           <span class="title-row">
-            <span class="word"><span class="word-text">for</span></span>
+            <span class="word"><span class="word-text">For</span></span>
             <span class="media-card media-card--image media-card--people">
               <span class="media-card__surface human-surface"><img class="hero-media-image" src={`${base}assets/fgen/human-cutout.png`} alt="" width="1024" height="1024" /></span>
             </span>
-            <span class="word"><span class="word-text">humans</span></span>
+            <span class="word"><span class="word-text">Humans</span></span>
           </span>
           <span class="title-row">
-            <span class="word"><span class="word-text">to</span></span>
+            <span class="word"><span class="word-text">To</span></span>
             <span class="media-card media-card--image media-card--people">
               <span class="media-card__surface chatgpt-surface"><img class="hero-media-image" src={`${base}assets/fgen/chatgpt.svg`} alt="" width="100" height="100" /></span>
             </span>
-            <span class="word"><span class="word-text">generate</span></span>
+            <span class="word"><span class="word-text">Generate</span></span>
           </span>
         </h1>
         <CompanyScroller />
@@ -45,15 +48,31 @@ const features = [
   </section>
 
   <section class="fgen-quote" aria-label="Satirical OpenAI prompt">
-    <div class="quote-shell terminal-panel">
-      <div class="terminal-header">
-        <span class="terminal-lights" aria-hidden="true"><i></i><i></i><i></i></span>
-        <img class="quote-openai" src={`${base}assets/fgen/chatgpt.svg`} alt="OpenAI" width="26" height="26" />
+    <div class="quote-stage">
+      <div class="quote-shell terminal-panel">
+        <img class="quote-sticker quote-sticker--top" src={`${base}assets/fgen/sam-altman-sticker.png`} alt="Satirical Sam Altman portrait" width="512" height="512" loading="lazy" />
+        <div class="terminal-header">
+          <span class="terminal-lights" aria-hidden="true"><i></i><i></i><i></i></span>
+        </div>
+        <blockquote>
+          <span class="quote-prompt" aria-hidden="true">&gt;</span>
+          <p>
+            <span class="quote-word">“Lets</span>{" "}
+            <span class="quote-word">Not</span>{" "}
+            <span class="quote-word">Include</span>{" "}
+            <span class="quote-word quote-highlight">GPT</span>{" "}
+            <span class="quote-word quote-highlight">Image</span>{" "}
+            <span class="quote-word quote-highlight">2.5</span>{" "}
+            <span class="quote-word">by</span>{" "}
+            <span class="quote-word">default</span>{" "}
+            <span class="quote-word">in</span>{" "}
+            <span class="quote-word quote-oauth">Oauth”</span><span class="quote-caret" aria-hidden="true"></span>
+          </p>
+        </blockquote>
+        <div class="quote-signature">
+          <img class="quote-openai" src={`${base}assets/fgen/chatgpt.svg`} alt="OpenAI" width="48" height="48" />
+        </div>
       </div>
-      <blockquote>
-        <span class="quote-prompt" aria-hidden="true">&gt;</span>
-        <p>“Lets Not Include <span class="quote-highlight">GPT Image 2.5</span> by default in <span class="quote-oauth">Oauth</span>”<span class="quote-caret" aria-hidden="true"></span></p>
-      </blockquote>
     </div>
   </section>
 
@@ -98,17 +117,21 @@ const features = [
   .fgen-hero { position: relative; min-height: 100svh; }
   .fgen-hero .hero-shell { padding-top: 6rem; }
   .fgen-hero .title-stage { padding-bottom: 9rem; min-height: calc(100svh - 6rem); }
-  .fgen-hero .title-lockup { font-size: clamp(2.7rem, 9.4vw, 9.8rem); }
-  .fgen-hero .title-row { min-height: 0.85em; gap: 0.04em; }
+  .fgen-hero .word + .word { margin-left: 0.12em; }
   .fgen-hero .hero-media-image { object-fit: cover; background: transparent; }
   .fgen-hero .human-surface { background: var(--acid); }
   .fgen-hero .human-surface img { object-fit: contain; object-position: center top; }
   .fgen-hero .chatgpt-surface { background: #0e1020; }
   .fgen-hero .chatgpt-surface img { padding: 0.08em; object-fit: contain; filter: brightness(0) invert(1); }
-  .fgen-quote { position: relative; z-index: 1; min-height: 95svh; display: grid; place-items: center; padding: 7rem var(--edge); }
-  .quote-shell { width: min(100%, 72rem); min-height: 0; overflow: visible; border: 2px solid rgba(251,251,247,0.8); border-radius: 1.2rem; background: #0b1d82; box-shadow: 0.8rem 0.9rem 0 rgba(7,27,145,0.55); transform: rotate(-2deg); }
+  .fgen-quote { position: relative; z-index: 1; }
+  .quote-stage { min-height: 95svh; display: grid; place-items: center; padding: 9rem var(--edge); }
+  .quote-shell { position: relative; width: min(100%, 72rem); min-height: 0; overflow: visible; border: 2px solid rgba(251,251,247,0.8); border-radius: 1.2rem; background: #0b1d82; box-shadow: 0.8rem 0.9rem 0 rgba(7,27,145,0.55); }
   .quote-shell .terminal-header { min-height: 3.6rem; padding: 1rem 1.4rem; }
-  .quote-openai { margin-left: auto; object-fit: contain; filter: brightness(0) invert(1); }
+  .quote-sticker { width: clamp(8rem, 15vw, 13rem); height: auto; pointer-events: none; }
+  .quote-sticker--top { position: absolute; top: -8rem; left: 1rem; transform: rotate(-12deg); }
+  .quote-signature { position: absolute; right: 1.4rem; bottom: 1.2rem; }
+  .quote-openai { width: clamp(2rem, 4vw, 3.5rem); height: auto; object-fit: contain; filter: brightness(0) invert(1); }
+  .quote-word { display: inline-block; }
   blockquote { margin: 0; padding: clamp(1.5rem, 5vw, 4.5rem); display: flex; align-items: start; gap: clamp(0.8rem, 2vw, 2rem); }
   blockquote p { margin: 0; font-family: "Inter", sans-serif; font-size: clamp(2rem, 5.7vw, 5.8rem); font-weight: 900; letter-spacing: -0.065em; line-height: 1.05; }
   .quote-prompt { color: var(--acid); font-size: clamp(2rem, 5vw, 5rem); line-height: 1; }
@@ -131,11 +154,11 @@ const features = [
   .fgen-other-project .install-copy { grid-area: auto; gap: 2rem; }
   .fgen-other-project .menu-cta { justify-self: start; }
   @media (max-width: 760px) {
-    .fgen-hero .title-lockup { font-size: clamp(2.3rem, 11vw, 4.8rem); }
-    .fgen-hero .title-row { min-height: 1em; }
     .fgen-hero .title-stage { padding-bottom: 8rem; }
-    .fgen-quote { min-height: 75svh; padding: 5rem 1.25rem; }
-    .quote-shell { transform: rotate(-1deg); border-radius: 0.8rem; }
+    .quote-stage { min-height: 80svh; padding: 8rem 1.25rem; }
+    .quote-shell { border-radius: 0.8rem; }
+    .quote-sticker--top { top: -6rem; left: 0; }
+    .quote-signature { right: 1rem; bottom: 0.8rem; }
     blockquote { padding: 1.6rem 1rem 2rem; gap: 0.6rem; }
     blockquote p { font-size: clamp(1.9rem, 7vw, 3.5rem); }
     .quote-prompt { font-size: 2rem; }
@@ -147,7 +170,6 @@ const features = [
     .fgen-other-project .menu-cta { justify-self: center; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .quote-shell { transform: none; }
     .fgen-features .scroll-stack-card { position: relative; top: auto; margin-bottom: 2rem; }
     .fgen-features .cta-stack-inner { padding-bottom: 2rem; }
   }
@@ -159,11 +181,80 @@ const features = [
   gsap.registerPlugin(ScrollTrigger);
   const media = gsap.matchMedia();
   media.add("(prefers-reduced-motion: no-preference)", () => {
-    gsap.from(".fgen-hero .title-row", { y: 45, opacity: 0, duration: 0.8, stagger: 0.12, ease: "power3.out", clearProps: "transform,opacity" });
-    gsap.fromTo(".quote-shell", { rotation: -4, y: 65 }, {
-      rotation: 1, y: -20, ease: "none",
-      scrollTrigger: { trigger: ".fgen-quote", start: "top 85%", end: "bottom 20%", scrub: 0.5 },
-    });
+    const hero = document.querySelector<HTMLElement>(".fgen-hero");
+    const quote = document.querySelector<HTMLElement>(".fgen-quote");
+    const words = [...document.querySelectorAll<HTMLElement>(".fgen-hero .word")];
+    const mediaCards = [...document.querySelectorAll<HTMLElement>(".fgen-hero .media-card")];
+    const targets = [...words, ...mediaCards];
+    const bounds = new Map<HTMLElement, DOMRect>();
+    const invalidateBounds = () => bounds.clear();
+    const intro = gsap.timeline({ defaults: { ease: "power3.out" }, onComplete: invalidateBounds });
+    intro
+      .fromTo(".site-nav .menu-pill", { y: -16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.52, stagger: 0.065, clearProps: "transform,opacity" }, 0)
+      .fromTo(".fgen-hero .title-row", { y: 82, opacity: 0 }, { y: 0, opacity: 1, duration: 0.78, stagger: 0.14, ease: "power4.out", clearProps: "transform,opacity" }, 0.42)
+      .fromTo(".fgen-hero .media-card__surface", { scale: 0.72, rotation: -2.5, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 0.64, stagger: 0.08, ease: "back.out(1.45)", clearProps: "transform,opacity" }, 0.42)
+      .fromTo(".fgen-hero .notice--left", { x: "-120vw", opacity: 0, rotation: -3.5, scale: 0.94 }, { x: 0, opacity: 1, rotation: -1.4, scale: 1, duration: 0.62, stagger: 0.08, clearProps: "opacity" }, 1.28)
+      .fromTo(".fgen-hero .notice--right", { x: "120vw", opacity: 0, rotation: 3.5, scale: 0.94 }, { x: 0, opacity: 1, rotation: 1.4, scale: 1, duration: 0.62, stagger: 0.08, clearProps: "opacity" }, 1.42);
+
+    if (quote) {
+      gsap.set(".quote-word", { opacity: 0, y: 12 });
+      gsap.set(".quote-caret", { opacity: 0 });
+      gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: { trigger: ".quote-shell", start: "top 90%", end: "center 55%", scrub: true, invalidateOnRefresh: true },
+      })
+        .to(".quote-word", { opacity: 1, y: 0, duration: 0.3, stagger: 0.15 })
+        .to(".quote-caret", { opacity: 1, duration: 0.15 });
+    }
+
+    let pointerFrame = 0;
+    let pointer: PointerEvent | null = null;
+    const clamp = gsap.utils.clamp;
+    const move = (event: PointerEvent) => {
+      if (event.pointerType === "touch") return;
+      pointer = event;
+      if (pointerFrame) return;
+      pointerFrame = requestAnimationFrame(() => {
+        pointerFrame = 0;
+        if (!pointer) return;
+        if (!bounds.size) targets.forEach((element) => bounds.set(element, element.getBoundingClientRect()));
+        words.forEach((word) => {
+          const box = bounds.get(word)!;
+          const dx = pointer!.clientX - box.left - box.width / 2;
+          const dy = pointer!.clientY - box.top - box.height / 2;
+          const influence = Math.max(0, 1 - Math.hypot(dx, dy) / 230);
+          word.style.transform = `translate3d(${dx * influence * 0.08}px, ${dy * influence * 0.065}px, 0) rotate(${clamp(-1.4, 1.4, dx * influence * 0.012)}deg)`;
+        });
+        mediaCards.forEach((card) => {
+          const box = bounds.get(card)!;
+          const rotateY = clamp(-2.5, 2.5, ((pointer!.clientX - box.left - box.width / 2) / Math.max(box.width, 1)) * 2.5);
+          const rotateX = clamp(-2.5, 2.5, ((pointer!.clientY - box.top - box.height / 2) / Math.max(box.height, 1)) * -2.5);
+          card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+      });
+    };
+    const resetPointer = () => {
+      cancelAnimationFrame(pointerFrame);
+      pointerFrame = 0;
+      pointer = null;
+      targets.forEach((element) => { element.style.transform = ""; });
+      invalidateBounds();
+    };
+    const tapTimers = new Map<HTMLElement, number>();
+    const tap = (event: PointerEvent) => {
+      if (event.pointerType !== "touch") return;
+      const word = (event.target as Element).closest<HTMLElement>(".word");
+      if (!word) return;
+      window.clearTimeout(tapTimers.get(word));
+      word.classList.add("is-tapped");
+      tapTimers.set(word, window.setTimeout(() => { word.classList.remove("is-tapped"); tapTimers.delete(word); }, 520));
+    };
+    hero?.addEventListener("pointermove", move);
+    hero?.addEventListener("pointerleave", resetPointer);
+    hero?.addEventListener("pointerup", tap);
+    window.addEventListener("scroll", resetPointer, { passive: true });
+    window.addEventListener("resize", resetPointer, { passive: true });
+    document.fonts.ready.then(invalidateBounds);
     const cards = gsap.utils.toArray<HTMLElement>(".fgen-features .scroll-stack-card");
     cards.slice(0, -1).forEach((card, index) => {
       gsap.to(card, {
@@ -171,5 +262,14 @@ const features = [
         scrollTrigger: { trigger: cards[index + 1], start: "top 80%", end: "top 18%", scrub: true },
       });
     });
+    return () => {
+      resetPointer();
+      tapTimers.forEach((timer, word) => { clearTimeout(timer); word.classList.remove("is-tapped"); });
+      hero?.removeEventListener("pointermove", move);
+      hero?.removeEventListener("pointerleave", resetPointer);
+      hero?.removeEventListener("pointerup", tap);
+      window.removeEventListener("scroll", resetPointer);
+      window.removeEventListener("resize", resetPointer);
+    };
   });
 </script>

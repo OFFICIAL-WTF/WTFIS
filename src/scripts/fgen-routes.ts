@@ -6,8 +6,6 @@ gsap.registerPlugin(ScrollTrigger);
 type Point = { x: number; y: number };
 type RoutePathName =
   | "agent-cli"
-  | "agent-tui"
-  | "you-cli"
   | "you-tui"
   | "cli-merge"
   | "tui-merge"
@@ -15,8 +13,6 @@ type RoutePathName =
 
 const PATH_NAMES: RoutePathName[] = [
   "agent-cli",
-  "agent-tui",
-  "you-cli",
   "you-tui",
   "cli-merge",
   "tui-merge",
@@ -34,26 +30,26 @@ const getPoint = (element: Element, stageBox: DOMRect, edge: "top" | "bottom"): 
   };
 };
 
-const upperPath = (start: Point, end: Point) => {
-  const middleY = start.y + Math.max(22, (end.y - start.y) * 0.54);
-  return `M ${start.x.toFixed(2)} ${start.y.toFixed(2)} L ${start.x.toFixed(2)} ${middleY.toFixed(2)} L ${end.x.toFixed(2)} ${middleY.toFixed(2)} L ${end.x.toFixed(2)} ${end.y.toFixed(2)}`;
-};
-
-const lowerPath = (start: Point, merge: Point) => {
-  const bendY = start.y + Math.max(18, (merge.y - start.y) * 0.42);
-  return `M ${start.x.toFixed(2)} ${start.y.toFixed(2)} L ${start.x.toFixed(2)} ${bendY.toFixed(2)} L ${merge.x.toFixed(2)} ${merge.y.toFixed(2)}`;
-};
-
-const finalPath = (merge: Point, imageTop: Point) => {
-  const beforeImage = imageTop.y - Math.min(24, Math.max(10, imageTop.y - merge.y) * 0.2);
-  return `M ${merge.x.toFixed(2)} ${merge.y.toFixed(2)} L ${merge.x.toFixed(2)} ${beforeImage.toFixed(2)} L ${imageTop.x.toFixed(2)} ${imageTop.y.toFixed(2)}`;
+const roundedPath = (start: Point, end: Point, bendAt = 0.5) => {
+  const distance = end.y - start.y;
+  const direction = Math.sign(end.x - start.x);
+  const radius = Math.min(32, Math.abs(end.x - start.x) / 2, Math.max(0, distance) * Math.min(bendAt, 1 - bendAt));
+  const bendY = start.y + distance * bendAt;
+  return [
+    `M ${start.x.toFixed(2)} ${start.y.toFixed(2)}`,
+    `V ${(bendY - radius).toFixed(2)}`,
+    `Q ${start.x.toFixed(2)} ${bendY.toFixed(2)} ${(start.x + direction * radius).toFixed(2)} ${bendY.toFixed(2)}`,
+    `H ${(end.x - direction * radius).toFixed(2)}`,
+    `Q ${end.x.toFixed(2)} ${bendY.toFixed(2)} ${end.x.toFixed(2)} ${(bendY + radius).toFixed(2)}`,
+    `V ${end.y.toFixed(2)}`,
+  ].join(" ");
 };
 
 const initRouteStory = (root: HTMLElement) => {
   const stage = root.querySelector<HTMLElement>("[data-route-stage]");
   const svg = root.querySelector<SVGSVGElement>("[data-route-lines]");
-  const agent = root.querySelector<HTMLElement>('[data-route-node="agent"] .fgen-route-label');
-  const you = root.querySelector<HTMLElement>('[data-route-node="you"] .fgen-route-label');
+  const agent = root.querySelector<HTMLElement>('[data-route-node="agent"]');
+  const you = root.querySelector<HTMLElement>('[data-route-node="you"]');
   const cli = root.querySelector<HTMLElement>('[data-terminal="cli"]');
   const tui = root.querySelector<HTMLElement>('[data-terminal="tui"]');
   const image = root.querySelector<HTMLElement>(".fgen-route-image");
@@ -68,7 +64,16 @@ const initRouteStory = (root: HTMLElement) => {
     (path): path is SVGPathElement => Boolean(path),
   );
 
-  if (!stage || !svg || !agent || !you || !cli || !tui || !image || paths.length !== PATH_NAMES.length) return;
+  if (
+    !stage ||
+    !svg ||
+    !agent ||
+    !you ||
+    !cli ||
+    !tui ||
+    !image ||
+    paths.length !== PATH_NAMES.length
+  ) return;
 
   let frame = 0;
 
@@ -84,20 +89,20 @@ const initRouteStory = (root: HTMLElement) => {
     const tuiTop = getPoint(tui, stageBox, "top");
     const cliBottom = getPoint(cli, stageBox, "bottom");
     const tuiBottom = getPoint(tui, stageBox, "bottom");
+    const imageTop = getPoint(image, stageBox, "top");
+    const terminalBottom = Math.max(cliBottom.y, tuiBottom.y);
+    const lowerTravel = Math.max(120, imageTop.y - terminalBottom);
     const merge: Point = {
       x: stageBox.width / 2,
-      y: Math.max(cliBottom.y, tuiBottom.y) + Math.max(34, stageBox.height * 0.025),
+      y: terminalBottom + lowerTravel * 0.52,
     };
-    const imageTop = getPoint(image, stageBox, "top");
 
     const pathsByName: Record<RoutePathName, string> = {
-      "agent-cli": upperPath(agentPoint, cliTop),
-      "agent-tui": upperPath(agentPoint, tuiTop),
-      "you-cli": upperPath(youPoint, cliTop),
-      "you-tui": upperPath(youPoint, tuiTop),
-      "cli-merge": lowerPath(cliBottom, merge),
-      "tui-merge": lowerPath(tuiBottom, merge),
-      "merge-output": finalPath(merge, imageTop),
+      "agent-cli": roundedPath(agentPoint, cliTop),
+      "you-tui": roundedPath(youPoint, tuiTop),
+      "cli-merge": roundedPath(cliBottom, merge, 0.62),
+      "tui-merge": roundedPath(tuiBottom, merge, 0.62),
+      "merge-output": roundedPath(merge, imageTop),
     };
 
     PATH_NAMES.forEach((name, index) => {
@@ -119,6 +124,10 @@ const initRouteStory = (root: HTMLElement) => {
   gsap.matchMedia().add("(prefers-reduced-motion: no-preference)", () => {
     const commandText = command?.textContent ?? "";
     const typing = { count: 0 };
+    const pathByName = Object.fromEntries(
+      PATH_NAMES.map((name, index) => [name, paths[index]]),
+    ) as Record<RoutePathName, SVGPathElement>;
+
     gsap.set(paths, { strokeDasharray: 1, strokeDashoffset: 1 });
     gsap.set(image, { opacity: 0.72 });
     if (command) command.textContent = "";
@@ -129,32 +138,99 @@ const initRouteStory = (root: HTMLElement) => {
     if (grid) gsap.set(grid, { opacity: 0, y: 12 });
     if (gridImages.length) gsap.set(gridImages, { opacity: 0.4, scale: 0.92, transformOrigin: "50% 50%" });
 
-    const timeline = gsap.timeline({
-      defaults: { ease: "none" },
-      scrollTrigger: {
-        trigger: root,
-        start: "top 76%",
-        end: "bottom 86%",
-        scrub: 1,
-      },
+    const upperRoutes: Array<[RoutePathName, HTMLElement, HTMLElement]> = [
+      ["agent-cli", agent, cli],
+      ["you-tui", you, tui],
+    ];
+
+    upperRoutes.forEach(([name, start, end]) => {
+      gsap.to(pathByName[name], {
+        strokeDashoffset: 0,
+        autoRound: false,
+        ease: "none",
+        scrollTrigger: {
+          trigger: start,
+          start: "bottom 84%",
+          endTrigger: end,
+          end: "top 34%",
+          scrub: true,
+          invalidateOnRefresh: true,
+          id: `fgen-upper-${name}`,
+        },
+      });
     });
 
-    timeline.to(paths.slice(0, 4), { strokeDashoffset: 0, duration: 1.35 }, 0);
-    if (status) timeline.to(status, { opacity: 1, duration: 0.12 }, 0.9);
-    if (command) timeline.to(typing, {
+    const cliDemo = gsap.timeline({
+      defaults: { ease: "none" },
+      scrollTrigger: {
+        trigger: cli,
+        start: "top 84%",
+        end: "top 20%",
+        scrub: 0.8,
+        invalidateOnRefresh: true,
+        id: "fgen-cli-demo",
+      },
+    });
+    if (status) cliDemo.to(status, { opacity: 1, duration: 0.12 }, 0.34);
+    if (command) cliDemo.to(typing, {
       count: commandText.length,
       snap: "count",
-      duration: 0.55,
+      duration: 0.58,
       onUpdate: () => { command.textContent = commandText.slice(0, typing.count); },
-    }, 1.02);
-    if (progress) timeline.to(progress, { scaleX: 1, duration: 0.75 }, 1.42);
-    if (prompt) timeline.to(prompt, { opacity: 1, y: 0, duration: 0.2 }, 1.55);
-    if (grid) timeline.to(grid, { opacity: 1, y: 0, duration: 0.28 }, 1.72);
-    if (gridImages.length) timeline.to(gridImages, { opacity: 1, scale: 1, duration: 0.28, stagger: 0.06 }, 1.78);
-    if (result) timeline.to(result, { opacity: 1, y: 0, duration: 0.2 }, 2.18);
-    timeline.to(paths.slice(4, 6), { strokeDashoffset: 0, duration: 0.72, stagger: 0.1 }, 2.35);
-    timeline.to(paths[6], { strokeDashoffset: 0, duration: 0.42 }, 3.16);
-    timeline.to(image, { opacity: 1, duration: 0.42 }, 3.28);
+    }, 0.42);
+    if (progress) cliDemo.to(progress, { scaleX: 1, duration: 0.75 }, 1.08);
+    if (result) cliDemo.to(result, { opacity: 1, y: 0, duration: 0.22 }, 1.9);
+
+    const tuiDemo = gsap.timeline({
+      defaults: { ease: "none" },
+      scrollTrigger: {
+        trigger: tui,
+        start: "top 84%",
+        end: "top 20%",
+        scrub: 0.8,
+        invalidateOnRefresh: true,
+        id: "fgen-tui-demo",
+      },
+    });
+    if (prompt) tuiDemo.to(prompt, { opacity: 1, y: 0, duration: 0.2 }, 0.34);
+    if (grid) tuiDemo.to(grid, { opacity: 1, y: 0, duration: 0.28 }, 0.68);
+    if (gridImages.length) tuiDemo.to(gridImages, { opacity: 1, scale: 1, duration: 0.28, stagger: 0.06 }, 0.82);
+
+    const lowerRoutes: Array<[RoutePathName, HTMLElement]> = [
+      ["cli-merge", cli],
+      ["tui-merge", tui],
+    ];
+    lowerRoutes.forEach(([name, start]) => {
+      gsap.to(pathByName[name], {
+        strokeDashoffset: 0,
+        autoRound: false,
+        ease: "none",
+        scrollTrigger: {
+          trigger: start,
+          start: "bottom 78%",
+          endTrigger: image,
+          end: "top 58%",
+          scrub: true,
+          invalidateOnRefresh: true,
+          id: `fgen-lower-${name}`,
+        },
+      });
+    });
+
+    const outputTimeline = gsap.timeline({
+      defaults: { ease: "none", autoRound: false },
+      scrollTrigger: {
+        trigger: image,
+        start: "top 64%",
+        end: "top 24%",
+        scrub: 0.8,
+        invalidateOnRefresh: true,
+        id: "fgen-route-output",
+      },
+    });
+    outputTimeline
+      .to(pathByName["merge-output"], { strokeDashoffset: 0, duration: 0.72 }, 0)
+      .to(image, { opacity: 1, duration: 0.48 }, 0.34);
 
     return () => {
       if (command) command.textContent = commandText;

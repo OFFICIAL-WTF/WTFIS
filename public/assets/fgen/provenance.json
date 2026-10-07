@@ -5,7 +5,7 @@
   "tooling": {
     "generator": "fgen (fuckinggen CLI, ChatGPT Images subscription backend)",
     "generationPolicy": "Every generated raster in this manifest was produced by an explicit fgen gen command with an explicit --out path. No --last/state reference was used.",
-    "optimization": "Generated PNG outputs were converted with cwebp -quiet -q 84 to the served WebP paths. Transparent PNG cutouts were resized in place to 1024x1024 with macOS sips; alpha was rechecked after resizing."
+    "optimization": "Opaque generated outputs were converted with cwebp -quiet -q 84 to the served WebP paths. Transparent cutouts were resized with macOS sips or Pillow LANCZOS; final dimensions and verified alpha are recorded per asset."
   },
   "research": {
     "agentIdentities": [
@@ -92,6 +92,17 @@
       "prompt": "Transparent isolated square portrait of an adult human face only, a comically warped editorial caricature with stretched cheeks, one oversized surprised eye, tiny pursed mouth, asymmetrical ears, and delightfully uncanny expression; vivid cobalt blue, acid chartreuse, coral, and warm skin tones; high-detail painterly digital illustration with surreal rubbery distortion; head and neck fully inside frame; true transparent alpha around the silhouette; no checkerboard painted into background; no text, no logo, no watermark, no minors, no nudity.",
       "command": "fgen gen <prompt> --out public/assets/fgen/human-cutout.png --quality high --size 1024x1024 --timeout 300 --json",
       "generationEvidence": "fgen JSON summary saved /Users/volodymurvasualkiw/GSpace/Opensource/WTF/WTFIS-CLI/public/assets/fgen/human-cutout.png (2000844 bytes before resize)."
+    },
+    "sam-altman-sticker.png": {
+      "kind": "fgen-generated-transparent-cutout",
+      "generatedAt": "2026-10-07",
+      "dimensions": "512x512",
+      "format": "PNG RGBA",
+      "alpha": "verified: min 0, max 255, 151284 fully transparent pixels",
+      "sha256": "4c917708c42fe45bfff58103e86632537312a263fd16c221c51981adfd8ce055",
+      "prompt": "A photorealistic editorial die-cut sticker portrait of Sam Altman, the recognizable OpenAI CEO, head and upper shoulders only, facing slightly to the viewer right with a small wry amused smile and raised eyebrow. Accurate recognizable face, short brown hair, natural skin, dark navy crewneck. Clean thin white sticker contour around the silhouette. Entire head including hair and shoulders comfortably inside the square, ample transparent space around it. True transparent PNG alpha outside the contour, absolutely no background, no checkerboard, no words, no logo, no watermark, no speech bubble. For a playful satirical technology website collage, not an endorsement.",
+      "command": "fgen gen <prompt> --out /tmp/fgen-sam-altman-sticker.png --quality high --size 1024x1024 --timeout 300 --json",
+      "generationEvidence": "FGEN saved 1412736 bytes. The 1254x1254 RGBA source had alpha extrema 0..255; resized to 512x512 with Pillow LANCZOS and saved as a 251985-byte PNG."
     },
     "hero-generated.webp": {
       "kind": "fgen-generated",

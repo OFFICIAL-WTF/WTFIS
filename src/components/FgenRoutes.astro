@@ -11,8 +11,6 @@ const fgenAsset = (name: string) => `${base}assets/fgen/${name}`;
   <div class="fgen-route-stage" data-route-stage>
     <svg class="fgen-route-lines" data-route-lines aria-hidden="true" focusable="false" viewBox="0 0 1000 1200" preserveAspectRatio="none">
       <path class="route-path" pathLength="1" data-route-path="agent-cli" d="M300 150 L300 460 L245 650" />
-      <path class="route-path" pathLength="1" data-route-path="agent-tui" d="M300 150 L440 500 L755 650" />
-      <path class="route-path" pathLength="1" data-route-path="you-cli" d="M700 150 L560 500 L245 650" />
       <path class="route-path" pathLength="1" data-route-path="you-tui" d="M700 150 L700 460 L755 650" />
       <path class="route-path route-path--lower" pathLength="1" data-route-path="cli-merge" d="M245 900 L245 1000 L500 1060" />
       <path class="route-path route-path--lower" pathLength="1" data-route-path="tui-merge" d="M755 900 L755 1000 L500 1060" />
@@ -44,6 +42,7 @@ const fgenAsset = (name: string) => `${base}assets/fgen/${name}`;
 
     <div class="fgen-route-terminals" data-route-terminals>
       <article class="terminal-panel fgen-terminal" data-terminal="cli" aria-label="FGEN CLI">
+        <h3 class="fgen-terminal-label">FGEN <span>CLI</span></h3>
         <div class="terminal-header">
           <span class="terminal-lights" aria-hidden="true"><i></i><i></i><i></i></span>
           <span class="terminal-name">FGEN CLI</span>
@@ -60,6 +59,7 @@ const fgenAsset = (name: string) => `${base}assets/fgen/${name}`;
       </article>
 
       <article class="terminal-panel fgen-terminal" data-terminal="tui" aria-label="FGEN TUI">
+        <h3 class="fgen-terminal-label">FGEN <span>TUI</span></h3>
         <div class="terminal-header">
           <span class="terminal-lights" aria-hidden="true"><i></i><i></i><i></i></span>
           <span class="terminal-name">FGEN TUI</span>
@@ -151,6 +151,7 @@ const fgenAsset = (name: string) => `${base}assets/fgen/${name}`;
     position: relative;
     width: min(92rem, 100%);
     margin: 0 auto;
+    padding-bottom: clamp(2rem, 5vw, 6rem);
     isolation: isolate;
   }
 
@@ -169,8 +170,8 @@ const fgenAsset = (name: string) => `${base}assets/fgen/${name}`;
     fill: none;
     stroke: var(--fgen-deep);
     stroke-width: 1.4;
-    stroke-linecap: square;
-    stroke-linejoin: miter;
+    stroke-linecap: round;
+    stroke-linejoin: round;
     vector-effect: non-scaling-stroke;
   }
 
@@ -191,7 +192,7 @@ const fgenAsset = (name: string) => `${base}assets/fgen/${name}`;
     grid-template-columns: repeat(2, minmax(7rem, 12rem));
     justify-content: center;
     gap: clamp(2.25rem, 16vw, 16rem);
-    min-height: clamp(12rem, 20vw, 18rem);
+    min-height: clamp(13rem, 21vw, 18rem);
   }
 
   .fgen-route-node {
@@ -224,7 +225,24 @@ const fgenAsset = (name: string) => `${base}assets/fgen/${name}`;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: clamp(0.8rem, 2.6vw, 2rem);
-    margin-top: clamp(8rem, 13vw, 13rem);
+    margin-top: max(28rem, 90svh);
+  }
+
+
+  .fgen-terminal-label {
+    margin: 1.35rem 1.05rem 0.75rem;
+    color: var(--fgen-paper);
+    font-family: "Inter", sans-serif;
+    font-size: clamp(2.25rem, 4.4vw, 4.5rem);
+    font-weight: 900;
+    letter-spacing: -0.065em;
+    line-height: 0.85;
+    white-space: nowrap;
+  }
+
+  .fgen-terminal-label span {
+    margin-left: 0.1em;
+    color: var(--fgen-acid);
   }
 
   .terminal-panel.fgen-terminal {
@@ -383,7 +401,7 @@ const fgenAsset = (name: string) => `${base}assets/fgen/${name}`;
     z-index: 1;
     display: grid;
     justify-items: center;
-    margin-top: clamp(10rem, 15vw, 16rem);
+    margin-top: max(30rem, 100svh);
   }
 
   .fgen-route-image {
@@ -470,11 +488,16 @@ const fgenAsset = (name: string) => `${base}assets/fgen/${name}`;
     .fgen-route-terminals {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 0.6rem;
-      margin-top: 8rem;
+      margin-top: max(22rem, 80svh);
     }
 
     .terminal-panel.fgen-terminal {
       min-height: 15.5rem;
+    }
+
+    .fgen-terminal-label {
+      margin: 1rem 0.58rem 0.65rem;
+      font-size: clamp(1.05rem, 5.5vw, 1.8rem);
     }
 
     .fgen-terminal .terminal-header { gap: 0.4rem; padding: 0.65rem 0.5rem; }
@@ -487,7 +510,7 @@ const fgenAsset = (name: string) => `${base}assets/fgen/${name}`;
     .fgen-cli-result { font-family: "IBM Plex Mono", monospace; font-size: 0.56rem; font-weight: 400; letter-spacing: 0; }
 
     .fgen-route-output {
-      margin-top: 10rem;
+      margin-top: max(24rem, 85svh);
     }
 
     .fgen-route-image {
@@ -496,7 +519,11 @@ const fgenAsset = (name: string) => `${base}assets/fgen/${name}`;
     }
   }
 
+  :global(html:not(.js)) .fgen-route-lines { display: none; }
+
   @media (prefers-reduced-motion: reduce) {
+    .fgen-route-terminals { margin-top: clamp(11rem, 34vh, 30rem); }
+    .fgen-route-output { margin-top: clamp(14rem, 36vh, 34rem); }
     .fgen-route-lines,
     .fgen-route-image,
     .fgen-tui-grid img,

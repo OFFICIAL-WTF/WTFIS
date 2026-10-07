@@ -2981,6 +2981,12 @@ html.js body:not(.site-layout) .notification {
   }
 }
 
+@media (max-width: 560px) {
+  .wtfis-nav .menu-links a[target="_blank"] {
+    display: none;
+  }
+}
+
 @media (max-width: 390px) {
   .title-lockup {
     font-size: clamp(1.95rem, 8.55vw, 3.3rem);
