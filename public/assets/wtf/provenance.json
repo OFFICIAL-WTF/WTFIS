@@ -1,0 +1,69 @@
+{
+  "schema": "wtf-media-provenance/v1",
+  "generatedAt": "2026-10-07",
+  "directory": "public/assets/wtf",
+  "tooling": {
+    "generator": "fgen (fuckinggen CLI, ChatGPT Images subscription backend)",
+    "generationPolicy": "Every raster was generated with an explicit fgen gen command and --out path. No reference images, --last state, or WTFIS artwork were used.",
+    "optimization": "Logos resized with Pillow LANCZOS, retaining PNG alpha. Hero art center-fitted with Pillow LANCZOS and encoded as WebP at quality 86, method 6."
+  },
+  "assets": {
+    "logo.png": {
+      "kind": "fgen-generated-transparent-cutout",
+      "dimensions": "768x384",
+      "format": "PNG RGBA",
+      "bytes": 106820,
+      "sha256": "6e8438b81ea9f75d1e2d5cc220c95e155ee5d01378bcecdff078b5f8743da48f",
+      "prompt": "Create one original raster brand logo for WTF, an irreverent family of open-source terminal tools. An exceptionally clear compact interlocking WTF monogram, exact uppercase letters W T F, with a small terminal chevron integrated into the W and one acid-lime square cursor tucked beside the F. Strong chunky geometric white faces, deep cobalt blue #0b28b6 extruded side edges, one tiny acid lime #d4ff45 accent. Confident playful brutalist software identity, bold silhouette, crisp vector-like edges, very simple readable geometry. Straight-on with only a subtle dimensional extrusion, not tilted. Standalone die-cut mark centered with generous clear space. TRUE transparent PNG alpha outside the mark, not a checkerboard or opaque background. No enclosing badge, no app icon tile, no subtitle, no slogan, no decorative objects, no mockup. The only lettering is WTF. It must read clearly at 64 pixels on an electric blue #1f42f3 website.",
+      "command": "fgen gen <prompt> --out public/assets/wtf/logo.png --quality high --size 1024x1024 --timeout 300 --json",
+      "generationEvidence": "FGEN saved 497191 bytes; original source was 1774x887 RGBA.",
+      "sourceSha256": "543d1109d0004f016980def9c583800043b26ebea17753978fee8c8827bcad48",
+      "alpha": "verified: min 0, max 255 after resizing"
+    },
+    "fgit-logo.png": {
+      "kind": "fgen-generated-transparent-cutout",
+      "dimensions": "512x512",
+      "format": "PNG RGBA",
+      "bytes": 80921,
+      "sha256": "8644774630a8dd092d673c975c5c65aaf9aadced0a95967ad7fda60711ba4b13",
+      "prompt": "Create one original compact symbol-only logo for FGIT, an open-source terminal tool for reviewing changes and shipping git commits. A bold clever geometric letter F constructed from a three-node branching git graph, with a terminal chevron > integrated into the lower stem and one acid-lime #d4ff45 commit node. Deep cobalt blue #0b28b6 and electric blue #1f42f3 solid faces, very subtle dimensional side extrusion, thick clean vector-like edges. Strong simple silhouette, playful practical developer-tool identity, legible at 64 pixels. Centered standalone die-cut mark on TRUE transparent PNG alpha with generous clear space. No checkerboard, no opaque background, no enclosing tile or badge, no official Git diamond logo, no watermark, no captions and no text. This is an original FGIT project logo, not a mockup.",
+      "command": "fgen gen <prompt> --out public/assets/wtf/fgit-logo.png --quality high --size 1024x1024 --timeout 300 --json",
+      "generationEvidence": "FGEN saved 425653 bytes; original source was 1254x1254 RGBA.",
+      "sourceSha256": "9abd0af4fa2d0c1f620945dfd438e9e9a07820c74acb6d18deb1ec8bccb798a8",
+      "alpha": "verified: min 0, max 255 after resizing"
+    },
+    "feature-search.webp": {
+      "kind": "fgen-generated",
+      "dimensions": "720x540",
+      "format": "WebP lossy",
+      "bytes": 24654,
+      "sha256": "9a2caf4981d99f70c004365b2c28d34f22191a95290764306c6c2882234882ae",
+      "prompt": "Create one original playful editorial artwork for the WTF open-source software family, a missing-feature search metaphor. A chunky acid-lime magnifying glass held at an angle in front of a small metallic question mark, floating above glossy electric-cobalt modular blocks. Macro studio photography mixed with surreal 3D illustration, tactile polished plastic and brushed chrome, cobalt #1f42f3 and lime #d4ff45 with a little coral red. Bold simple composition, oversized magnifier dominates center and remains legible as a tiny inline image in a giant headline. Horizontal 4:3 framing, subject fully inside the central 70 percent, clean cobalt backdrop, crisp lighting. No people, no flowers, no logos, no letters or readable text, no watermark, no border. This is bespoke artwork for Where the Fuck is this Feature, not a folder finder.",
+      "command": "fgen gen <prompt> --out public/assets/wtf/feature-search.png --quality high --size 1536x1024 --timeout 300 --json",
+      "generationEvidence": "FGEN saved 1637233 bytes; original source was 1448x1086 RGB.",
+      "sourceSha256": "13e09f222b1111d1dd3b0003861ea76a74232413933bf3aa9075b06459e3eeae"
+    },
+    "missing-feature.webp": {
+      "kind": "fgen-generated",
+      "dimensions": "840x360",
+      "format": "WebP lossy",
+      "bytes": 42552,
+      "sha256": "da2c362d9f65ee2b9089d1555de326a43047e48067d11cc27a833970b3a95919",
+      "prompt": "Create one original wide horizontal editorial 3D artwork for the WTF developer-tools website. A gigantic glossy coral-red question-mark keyboard keycap popping out of an electric-cobalt mechanical keyboard, with one empty glowing acid-lime key socket beside it: the missing feature. Tactile polished plastic, crisp dramatic studio light, playful rebellious software aesthetic, electric blue #1f42f3, coral red, acid lime #d4ff45. Macro close-up. The red question-mark key and empty lime socket must both occupy the central horizontal band and remain recognizable when the image is cropped to a wide 2.3:1 strip. No people, no flower, no computer screen, no brand logos, no words or captions; only a simple question-mark symbol on the key. Clean bold scene, no border, no watermark.",
+      "command": "fgen gen <prompt> --out public/assets/wtf/missing-feature.png --quality high --size 1536x1024 --timeout 300 --json",
+      "generationEvidence": "FGEN saved 2064188 bytes; original source was 1902x827 RGB.",
+      "sourceSha256": "6efd880c728ba2250f7696824bb14afb756bb4868bdb22ebafab90376218dfa8"
+    },
+    "feature-piece.webp": {
+      "kind": "fgen-generated",
+      "dimensions": "720x540",
+      "format": "WebP lossy",
+      "bytes": 15232,
+      "sha256": "b0ba9deb816ce6d5a2e04cd9ae6f687bbe6c33daecd067b46ccc28ed5936fda7",
+      "prompt": "Create one original playful editorial 3D artwork for the WTF developer-tools website: an oversized acid-lime puzzle piece hovering precisely above its missing socket in a chunky white and electric-cobalt modular software block. The piece is the feature that was missing. Tactile glossy enamel and hard plastic, bold simple silhouette, crisp studio shadows, coral-red seamless backdrop, cobalt #1f42f3 and acid lime #d4ff45 accents. Premium surreal product photography with irreverent developer-tool energy. Horizontal 4:3 composition, all essential objects within the center 70 percent; this artwork will be a small inline image between huge headline words. No people, no folders, no flowers, no letters, no text, no brand logos, no watermark, no border.",
+      "command": "fgen gen <prompt> --out public/assets/wtf/feature-piece.png --quality high --size 1536x1024 --timeout 300 --json",
+      "generationEvidence": "FGEN saved 1531891 bytes; original source was 1448x1086 RGB.",
+      "sourceSha256": "ca1f7a1200a7b3b6736507e7fb59c9ea44997886aa0277e71a4b861c47d096e9"
+    }
+  }
+}

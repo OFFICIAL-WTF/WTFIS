@@ -37,7 +37,7 @@ const current = productMeta[product];
     ) : product === "wtfis" ? (
       <img src={`${base}WTFIS%20logo%20main.png`} alt="WTFIS" width="1024" height="1024" />
     ) : (
-      <span class="site-nav-wordmark" aria-hidden="true">&gt;WTF</span>
+      <img class="site-nav-logo--wtf" src={`${base}assets/wtf/logo.png`} alt="WTF" width="768" height="384" />
     )}
   </a>
   <div class="menu-links site-nav-links">
@@ -52,11 +52,9 @@ const current = productMeta[product];
 
 <style>
   :global(html:not(.js)) .site-nav { background: var(--electric-blue-deep); }
+  .site-nav-brand .site-nav-logo--wtf { filter: none; }
   @media (max-width: 420px) {
     .site-nav-links > a[target="_blank"] { display: none; }
-  }
-  @media (max-width: 360px) {
-    .site-nav-wordmark { font-size: 1.5rem; }
   }
 </style>
 

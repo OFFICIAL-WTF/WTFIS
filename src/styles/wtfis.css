@@ -3034,18 +3034,3 @@ html.js body:not(.site-layout) .notification {
 }
 
 
-.site-nav-wordmark {
-  display: block;
-  color: var(--white);
-  font-family: "Inter", sans-serif;
-  font-size: clamp(1.7rem, 3vw, 2.7rem);
-  font-weight: 900;
-  letter-spacing: -0.12em;
-  line-height: 0.75;
-  text-shadow: 0.04em 0.04em 0 var(--electric-blue-deep);
-}
-
-.top-nav.is-on-light .site-nav-wordmark {
-  color: var(--electric-blue-deep);
-  text-shadow: none;
-}
