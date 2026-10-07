@@ -3,7 +3,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
 const fgenAsset = (name: string) => `${base}assets/fgen/${name}`;
 ---
 
-<section class="fgen-routes" data-fgen-routes data-nav-light aria-labelledby="fgen-routes-title">
+<section class="fgen-routes" data-fgen-routes aria-labelledby="fgen-routes-title">
   <div class="fgen-routes-intro">
     <h2 id="fgen-routes-title">lets fix that problem</h2>
   </div>
@@ -124,8 +124,7 @@ const fgenAsset = (name: string) => `${base}assets/fgen/${name}`;
     position: relative;
     overflow: clip;
     padding: clamp(5rem, 10vw, 10rem) var(--edge, clamp(1rem, 2.8vw, 3.5rem)) clamp(7rem, 12vw, 12rem);
-    background: var(--fgen-paper);
-    color: var(--fgen-deep);
+    color: var(--fgen-paper);
   }
 
   .fgen-routes-intro {
@@ -138,7 +137,7 @@ const fgenAsset = (name: string) => `${base}assets/fgen/${name}`;
   .fgen-routes h2 {
     max-width: 10ch;
     margin: 0;
-    color: var(--fgen-deep);
+    color: var(--fgen-paper);
     font-family: "Inter", sans-serif;
     font-size: clamp(3rem, 10.5vw, 10.5rem);
     font-weight: 900;
@@ -168,20 +167,20 @@ const fgenAsset = (name: string) => `${base}assets/fgen/${name}`;
 
   .route-path {
     fill: none;
-    stroke: var(--fgen-deep);
-    stroke-width: 1.4;
+    stroke: var(--fgen-paper);
+    stroke-width: 1.8;
     stroke-linecap: round;
     stroke-linejoin: round;
     vector-effect: non-scaling-stroke;
   }
 
   .route-path--lower {
-    stroke: var(--fgen-blue);
+    stroke: var(--fgen-acid);
     stroke-width: 1.7;
   }
 
   .route-path--output {
-    stroke: var(--fgen-deep);
+    stroke: var(--fgen-acid);
     stroke-width: 2;
   }
 
@@ -212,7 +211,7 @@ const fgenAsset = (name: string) => `${base}assets/fgen/${name}`;
   }
 
   .fgen-route-label {
-    color: var(--fgen-deep);
+    color: var(--fgen-paper);
     font-size: clamp(0.57rem, 0.75vw, 0.72rem);
     font-weight: 600;
     letter-spacing: 0.08em;
@@ -411,7 +410,7 @@ const fgenAsset = (name: string) => `${base}assets/fgen/${name}`;
     aspect-ratio: 1;
     margin: 0;
     overflow: hidden;
-    border: 2px solid var(--fgen-deep);
+    border: 2px solid var(--fgen-paper);
     background: var(--fgen-blue);
     box-shadow: 0.62rem 0.68rem 0 var(--fgen-deep);
   }
