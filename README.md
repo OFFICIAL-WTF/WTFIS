@@ -5,8 +5,8 @@
 <p align="center">
   <a href="https://www.rust-lang.org/"><img src="https://img.shields.io/badge/Rust-000000?style=flat-square&amp;logo=rust&amp;logoColor=white" alt="Built with Rust" /></a>
   <a href="https://github.com/OFFICIAL-WTF/WTFIS/actions/workflows/ci.yml"><img src="https://github.com/OFFICIAL-WTF/WTFIS/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
-  <a href="https://github.com/OFFICIAL-WTF/WTFIS/releases"><img src="https://img.shields.io/github/v/release/prophesourvolodymyr/WTFIS?display_name=tag&amp;style=flat-square" alt="Latest release" /></a>
-  <a href="https://github.com/OFFICIAL-WTF/WTFIS/blob/main/LICENSE"><img src="https://img.shields.io/github/license/prophesourvolodymyr/WTFIS?style=flat-square" alt="WTFPL license" /></a>
+  <a href="https://github.com/OFFICIAL-WTF/WTFIS/releases"><img src="https://img.shields.io/github/v/release/OFFICIAL-WTF/WTFIS?display_name=tag&amp;style=flat-square" alt="Latest release" /></a>
+  <a href="https://github.com/OFFICIAL-WTF/WTFIS/blob/main/LICENSE"><img src="https://img.shields.io/github/license/OFFICIAL-WTF/WTFIS?style=flat-square" alt="WTFPL license" /></a>
   <a href="https://github.com/OFFICIAL-WTF/homebrew-wtfis"><img src="https://img.shields.io/badge/Homebrew-tap-FBB040?style=flat-square&amp;logo=homebrew&amp;logoColor=white" alt="Homebrew tap" /></a>
   <img src="https://img.shields.io/badge/macOS-supported-000000?style=flat-square&amp;logo=apple&amp;logoColor=white" alt="macOS supported" />
   <img src="https://img.shields.io/badge/Linux-supported-FCC624?style=flat-square&amp;logo=linux&amp;logoColor=black" alt="Linux supported" />
