@@ -4,10 +4,10 @@
 
 <p align="center">
   <a href="https://www.rust-lang.org/"><img src="https://img.shields.io/badge/Rust-000000?style=flat-square&amp;logo=rust&amp;logoColor=white" alt="Built with Rust" /></a>
-  <a href="https://github.com/prophesourvolodymyr/WTFIS/actions/workflows/ci.yml"><img src="https://github.com/prophesourvolodymyr/WTFIS/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
-  <a href="https://github.com/prophesourvolodymyr/WTFIS/releases"><img src="https://img.shields.io/github/v/release/prophesourvolodymyr/WTFIS?display_name=tag&amp;style=flat-square" alt="Latest release" /></a>
-  <a href="https://github.com/prophesourvolodymyr/WTFIS/blob/main/LICENSE"><img src="https://img.shields.io/github/license/prophesourvolodymyr/WTFIS?style=flat-square" alt="WTFPL license" /></a>
-  <a href="https://github.com/prophesourvolodymyr/homebrew-wtfis"><img src="https://img.shields.io/badge/Homebrew-tap-FBB040?style=flat-square&amp;logo=homebrew&amp;logoColor=white" alt="Homebrew tap" /></a>
+  <a href="https://github.com/OFFICIAL-WTF/WTFIS/actions/workflows/ci.yml"><img src="https://github.com/OFFICIAL-WTF/WTFIS/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="https://github.com/OFFICIAL-WTF/WTFIS/releases"><img src="https://img.shields.io/github/v/release/prophesourvolodymyr/WTFIS?display_name=tag&amp;style=flat-square" alt="Latest release" /></a>
+  <a href="https://github.com/OFFICIAL-WTF/WTFIS/blob/main/LICENSE"><img src="https://img.shields.io/github/license/prophesourvolodymyr/WTFIS?style=flat-square" alt="WTFPL license" /></a>
+  <a href="https://github.com/OFFICIAL-WTF/homebrew-wtfis"><img src="https://img.shields.io/badge/Homebrew-tap-FBB040?style=flat-square&amp;logo=homebrew&amp;logoColor=white" alt="Homebrew tap" /></a>
   <img src="https://img.shields.io/badge/macOS-supported-000000?style=flat-square&amp;logo=apple&amp;logoColor=white" alt="macOS supported" />
   <img src="https://img.shields.io/badge/Linux-supported-FCC624?style=flat-square&amp;logo=linux&amp;logoColor=black" alt="Linux supported" />
   <img src="https://img.shields.io/badge/Windows-supported-0078D4?style=flat-square&amp;logo=windows&amp;logoColor=white" alt="Windows supported" />
@@ -64,7 +64,7 @@ Tell WTFIS where to look, how far to look, and what to run after it finds someth
 **Homebrew**
 
 ```bash
-brew tap prophesourvolodymyr/wtfis
+brew tap OFFICIAL-WTF/wtfis
 brew install wtfis
 cat "$(brew --prefix wtfis)/share/wtfis/wtfis.zsh" >> ~/.zshrc
 source ~/.zshrc
@@ -77,7 +77,7 @@ echo 'source "$(brew --prefix wtfis)/share/wtfis/wtfis.bash"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-**Manual:** download `wtfis-macos-arm64.tar.gz` from [Releases](https://github.com/prophesourvolodymyr/WTFIS/releases/latest).
+**Manual:** download `wtfis-macos-arm64.tar.gz` from [Releases](https://github.com/OFFICIAL-WTF/WTFIS/releases/latest).
 
 ---
 
@@ -92,7 +92,7 @@ yay -S wtfis-cli
 **Homebrew**
 
 ```bash
-brew tap prophesourvolodymyr/wtfis
+brew tap OFFICIAL-WTF/wtfis
 brew install wtfis
 echo 'source "$(brew --prefix wtfis)/share/wtfis/wtfis.bash"' >> ~/.bashrc
 source ~/.bashrc
@@ -105,7 +105,7 @@ echo 'source "$(brew --prefix wtfis)/share/wtfis/wtfis.zsh"' >> ~/.zshrc
 source ~/.zshrc
 ```
 
-**Manual:** download `wtfis-linux-x86_64.tar.gz` from [Releases](https://github.com/prophesourvolodymyr/WTFIS/releases/latest).
+**Manual:** download `wtfis-linux-x86_64.tar.gz` from [Releases](https://github.com/OFFICIAL-WTF/WTFIS/releases/latest).
 
 ---
 
@@ -114,7 +114,7 @@ source ~/.zshrc
 **Scoop**
 
 ```powershell
-scoop bucket add wtfis https://github.com/prophesourvolodymyr/homebrew-wtfis
+scoop bucket add wtfis https://github.com/OFFICIAL-WTF/homebrew-wtfis
 scoop install wtfis
 . "$env:USERPROFILE\scoop\apps\wtfis\current\shell\wtfis.ps1"
 ```
@@ -125,7 +125,7 @@ For future sessions:
 Add-Content $PROFILE '. "$env:USERPROFILE\scoop\apps\wtfis\current\shell\wtfis.ps1"'
 ```
 
-**Manual:** download `wtfis-windows-x86_64.zip` from [Releases](https://github.com/prophesourvolodymyr/WTFIS/releases/latest).
+**Manual:** download `wtfis-windows-x86_64.zip` from [Releases](https://github.com/OFFICIAL-WTF/WTFIS/releases/latest).
 
 <p align="center">
   <a href="https://buymeacoffee.com/professorvolodymyr"><img src="https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&amp;emoji=%E2%98%95&amp;slug=professorvolodymyr&amp;button_colour=D4FF45&amp;font_colour=0B28B6&amp;font_family=Inter&amp;outline_colour=0B28B6&amp;coffee_colour=FFDD00" alt="Buy me a coffee" /></a>
