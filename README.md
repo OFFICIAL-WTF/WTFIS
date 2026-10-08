@@ -19,6 +19,8 @@
 
 <p align="center">A local-first terminal finder for getting back to the folder you meant.</p>
 
+<p align="center"><a href="https://wtf.professorvolodymyr.com/wtfis/">Project site</a> · <a href="https://wtf.professorvolodymyr.com/docs/">Docs</a> · <a href="https://wtf.professorvolodymyr.com/">WTF hub</a></p>
+
 `wtfis` finds folders from a name, path, or typo. `cdd` is the short alias. Pick a match, press Enter, and your shell goes there.
 
 ## See it work
@@ -173,12 +175,11 @@ cargo run -- my-project
 
 ### Website
 
-The Astro site is the WTF project hub. Its GitHub Pages base remains `/WTFIS/`:
+The Astro site is the WTF project hub, deployed as an isolated Vercel project at [wtf.professorvolodymyr.com](https://wtf.professorvolodymyr.com/).
 
-- `/WTFIS/` — WTF projects.
-- `/WTFIS/fgen/` and `/WTFIS/fgen/docs/` — FGEN showcase and command documentation.
-- `/WTFIS/wtfis/` and `/WTFIS/docs/` — preserved WTFIS showcase and documentation.
-
+- `/` — WTF projects.
+- `/fgen/` and `/fgen/docs/` — FGEN showcase and command documentation.
+- `/wtfis/` and `/docs/` — WTFIS showcase and documentation.
 ```bash
 npm ci
 npm run dev
