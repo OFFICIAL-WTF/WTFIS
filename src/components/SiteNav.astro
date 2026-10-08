@@ -52,7 +52,7 @@ const current = productMeta[product];
 
 <style>
   :global(html:not(.js)) .site-nav { background: var(--electric-blue-deep); }
-  .site-nav-brand .site-nav-logo--wtf { filter: none; }
+  .site-nav:not(.is-on-light) .site-nav-logo--wtf { filter: none; }
   @media (max-width: 420px) {
     .site-nav-links > a[target="_blank"] { display: none; }
   }

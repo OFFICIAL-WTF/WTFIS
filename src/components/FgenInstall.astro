@@ -1,27 +1,30 @@
 ---
 import { fgenInstall, fgenReleases } from "../data/fgen-install";
 const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
-const galleryLayers = [
-  { name: "back", travel: 0.14, images: [1, 4] },
-  { name: "middle", travel: 0.28, images: [2, 3] },
-  { name: "front", travel: 0.44, images: [5, 6] },
+const gallery = [
+  { image: 1, x: "4%", y: "70%", size: "20%", mobileX: "-8%", mobileY: "70%", mobileSize: "48%", tilt: -7, distance: 1.75, depth: 1 },
+  { image: 2, x: "76%", y: "76%", size: "26%", mobileX: "61%", mobileY: "76%", mobileSize: "55%", tilt: 6, distance: 1.95, depth: 2 },
+  { image: 5, x: "-9%", y: "160%", size: "33%", mobileX: "-20%", mobileY: "156%", mobileSize: "68%", tilt: -5, distance: 2.4, depth: 3 },
+  { image: 4, x: "68%", y: "180%", size: "22%", mobileX: "61%", mobileY: "190%", mobileSize: "48%", tilt: 7, distance: 1.75, depth: 1 },
+  { image: 3, x: "10%", y: "196%", size: "27%", mobileX: "-6%", mobileY: "203%", mobileSize: "57%", tilt: -6, distance: 1.95, depth: 2 },
+  { image: 6, x: "52%", y: "245%", size: "36%", mobileX: "38%", mobileY: "257%", mobileSize: "70%", tilt: 5, distance: 2.4, depth: 3 },
 ];
-const galleryTilts = [-8, 6, -6, 8, -5, 7];
 ---
 
 <section class="image-flight" id="image-flight" aria-label="Generated image gallery and FGEN installation">
-  <div class="flight-frame">
-    <div class="flight-gallery" aria-hidden="true">
-      {galleryLayers.map((layer) => (
-        <div class={`flight-layer flight-layer--${layer.name}`} data-travel={layer.travel}>
-          {layer.images.map((image) => (
-            <figure class="flight-art" style={`--tilt:${galleryTilts[image - 1]}deg`}>
-              <img src={`${base}assets/fgen/float-0${image}.webp`} alt="" width="800" height="800" decoding="async" />
+  <div class="flight-runway">
+    <div class="flight-frame">
+      <div class="flight-gallery" aria-hidden="true">
+        {gallery.map((card) => (
+          <div class="flight-card" data-flight-distance={card.distance} style={`--x:${card.x};--y:${card.y};--size:${card.size};--mobile-x:${card.mobileX};--mobile-y:${card.mobileY};--mobile-size:${card.mobileSize};--tilt:${card.tilt}deg;--depth:${card.depth}`}>
+            <figure class="flight-art">
+              <img src={`${base}assets/fgen/float-0${card.image}.webp`} alt="" width="800" height="800" decoding="async" />
             </figure>
-          ))}
-        </div>
-      ))}
+          </div>
+        ))}
+      </div>
     </div>
+  </div>
     <div class="flight-install" id="install" data-nav-light>
       <div class="install-layer-inner">
         <div class="install-copy">
@@ -80,14 +83,14 @@ const galleryTilts = [-8, 6, -6, 8, -5, 7];
         </div>
       </div>
     </div>
-  </div>
 </section>
 
 <style>
   .image-flight { position: relative; z-index: 2; overflow-x: clip; }
+  .flight-runway { position: relative; }
   .flight-frame { position: relative; }
   .flight-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 1.8vw, 1.5rem); width: min(calc(100% - 4 * var(--edge)), 78rem); margin: 0 auto; padding: 4rem 0; isolation: isolate; }
-  .flight-layer { display: contents; }
+  .flight-card { min-width: 0; }
   .flight-art { margin: 0; transform: rotate(var(--tilt)); }
   .flight-art img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border: 3px solid var(--white); box-shadow: 0.6rem 0.7rem 0 rgba(11, 40, 182, 0.7); }
   .flight-install { position: relative; z-index: 1; padding: clamp(2.5rem, 5vw, 5rem) var(--edge) clamp(2rem, 4vw, 4rem); scroll-margin-top: 6rem; border: 2px solid var(--electric-blue-deep); border-bottom: 0; border-radius: clamp(2rem, 5vw, 4rem) clamp(2rem, 5vw, 4rem) 0 0; background: #fff; color: var(--ink); box-shadow: 0 -1rem 3rem rgba(11, 29, 130, 0.18); pointer-events: auto; }
@@ -166,21 +169,14 @@ const galleryTilts = [-8, 6, -6, 8, -5, 7];
     white-space: pre-wrap;
   }
   .image-flight.is-animated {
-    height: 560svh;
     margin-top: calc(-1 * var(--flight-overlap, 0px));
     pointer-events: none;
   }
+  .is-animated .flight-runway { height: 320svh; }
   .is-animated .flight-frame { position: sticky; top: 0; height: 100svh; overflow: hidden; }
-  .is-animated .flight-gallery { position: absolute; z-index: 0; inset: 0; display: block; width: min(94vw, 150svh, 92rem); padding: 0; }
-  .is-animated .flight-layer { position: absolute; inset: 0; display: block; }
-  .is-animated .flight-art { position: absolute; left: var(--x); top: var(--y); width: var(--size); }
-  .is-animated .flight-layer--back { z-index: 0; --x: 8%; --y: 20%; --size: 24%; }
-  .is-animated .flight-layer--back .flight-art:last-child { --x: 67%; --y: 24%; --size: 21%; }
-  .is-animated .flight-layer--middle { z-index: 1; --x: 0%; --y: 42%; --size: 28%; }
-  .is-animated .flight-layer--middle .flight-art:last-child { --x: 69%; --y: 46%; }
-  .is-animated .flight-layer--front { z-index: 2; --x: 20%; --y: 61%; --size: 32%; }
-  .is-animated .flight-layer--front .flight-art:last-child { --x: 51%; --y: 70%; --size: 30%; }
-  .is-animated .flight-install { position: absolute; inset: auto 0 0; max-height: calc(100svh - 5.5rem); overflow: auto; }
+  .is-animated .flight-gallery { position: absolute; inset: 0; display: block; width: 100%; height: 100%; margin: 0; padding: 0; }
+  .is-animated .flight-card { position: absolute; z-index: var(--depth); left: var(--x); top: var(--y); width: var(--size); max-width: 36rem; }
+  .is-animated .flight-install { margin-top: -30svh; }
   @media (max-width: 760px) {
     .flight-install { padding: 2rem 1.25rem 1.5rem; }
     .install-layer-inner { grid-template-columns: minmax(0, 1fr); grid-template-areas: "copy" "shell" "platforms"; gap: 1.25rem; }
@@ -191,13 +187,9 @@ const galleryTilts = [-8, 6, -6, 8, -5, 7];
     .install-platforms { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-top: 1rem; }
     .install-platforms .platform-control { padding: 0.65rem; }
     .flight-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-    .is-animated .flight-gallery { width: 94vw; }
-    .is-animated .flight-layer--back { --x: 3%; --y: 15%; --size: 45%; }
-    .is-animated .flight-layer--back .flight-art:last-child { --x: 52%; --y: 19%; --size: 45%; }
-    .is-animated .flight-layer--middle { --x: -4%; --y: 39%; --size: 54%; }
-    .is-animated .flight-layer--middle .flight-art:last-child { --x: 50%; --y: 43%; }
-    .is-animated .flight-layer--front { --x: 10%; --y: 61%; --size: 58%; }
-    .is-animated .flight-layer--front .flight-art:last-child { --x: 39%; --y: 72%; --size: 58%; }
+    .is-animated .flight-runway { height: 280svh; }
+    .is-animated .flight-card { left: var(--mobile-x); top: var(--mobile-y); width: var(--mobile-size); }
+    .is-animated .flight-install { margin-top: -25svh; }
   }
   @media (max-height: 650px) and (min-width: 761px) {
     .install-shell-line[data-active-platform="windows"] .fgen-install-command { max-height: 31svh; }
@@ -275,54 +267,41 @@ const galleryTilts = [-8, 6, -6, 8, -5, 7];
     const media = gsap.matchMedia();
     media.add("(prefers-reduced-motion: no-preference)", () => {
       flight.classList.add("is-animated");
+      const runway = flight.querySelector<HTMLElement>(".flight-runway")!;
+      const frame = flight.querySelector<HTMLElement>(".flight-frame")!;
       const output = document.querySelector<HTMLElement>("[data-route-output]");
       const alignFlight = () => {
         if (!output) return;
         const naturalTop = flight.getBoundingClientRect().top - parseFloat(getComputedStyle(flight).marginTop);
-        flight.style.setProperty("--flight-overlap", `${naturalTop - output.getBoundingClientRect().top}px`);
+        const outputBox = output.getBoundingClientRect();
+        const overlap = Math.max(0, naturalTop - outputBox.top - outputBox.height * 0.58);
+        flight.style.setProperty("--flight-overlap", `${overlap}px`);
       };
       alignFlight();
       ScrollTrigger.addEventListener("refreshInit", alignFlight);
-      const gallery = flight.querySelector<HTMLElement>(".flight-gallery")!;
       const timeline = gsap.timeline({
         defaults: { ease: "none" },
-        scrollTrigger: { id: "fgen-image-flight", trigger: flight, start: "top bottom", end: "bottom bottom", scrub: 0.3, invalidateOnRefresh: true },
+        scrollTrigger: { id: "fgen-image-flight", trigger: runway, start: "top bottom", end: "bottom bottom", scrub: 0.45, invalidateOnRefresh: true },
       });
-      timeline.addLabel("enter", 0).addLabel("depth", 1.1).addLabel("install", 5.4);
-      timeline.fromTo(gallery,
-        { y: () => window.innerHeight * 0.75 },
-        { y: 0, duration: 1.65 },
-        "enter",
-      );
-      flight.querySelectorAll<HTMLElement>(".flight-layer").forEach((layer) => {
-        const travel = Number(layer.dataset.travel);
-        timeline.fromTo(layer, { y: 0 }, {
-          y: () => -window.innerHeight * travel,
-          duration: 4.3,
-        }, "depth");
+      flight.querySelectorAll<HTMLElement>(".flight-card").forEach((card) => {
+        timeline.fromTo(card, { y: 0 }, {
+          y: () => -frame.clientHeight * Number(card.dataset.flightDistance),
+          duration: 1,
+        }, 0);
       });
-      timeline.fromTo(flight.querySelector(".flight-install"), { yPercent: 105 }, { yPercent: 0, duration: 1.8 }, "install");
-      timeline.to({}, { duration: 0.45 });
-      const revealInstall = (event: Event) => {
-        const link = (event.target as Element).closest<HTMLAnchorElement>('a[href$="#install"]');
-        if (!link || !timeline.scrollTrigger) return;
-        const target = new URL(link.href);
-        if (target.pathname !== window.location.pathname) return;
-        event.preventDefault();
-        const end = timeline.scrollTrigger.end;
-        window.scrollTo({ top: end, behavior: "instant" });
-        history.replaceState(null, "", "#install");
-      };
-      document.addEventListener("click", revealInstall);
+      // The white installer rises in normal flow, so its height and the
+      // following feature section never depend on the animation's progress.
       const jumpToInstall = () => {
-        ScrollTrigger.refresh();
-        if (window.location.hash === "#install" && timeline.scrollTrigger) window.scrollTo(0, timeline.scrollTrigger.end);
+        if (window.location.hash === "#install") installer?.scrollIntoView({ behavior: "instant", block: "start" });
       };
-      document.fonts.ready.then(jumpToInstall);
+      document.fonts.ready.then(() => {
+        ScrollTrigger.refresh();
+        jumpToInstall();
+      });
       return () => {
         ScrollTrigger.removeEventListener("refreshInit", alignFlight);
         flight.style.removeProperty("--flight-overlap");
-        document.removeEventListener("click", revealInstall);
+        timeline.scrollTrigger?.kill();
         flight.classList.remove("is-animated");
       };
     });

@@ -26,6 +26,20 @@
       "alpha": "verified delivered alpha extrema 0..255; 233769 fully transparent pixels; alpha bbox 59,102 to 709,281",
       "optimization": "Removed generation-noise pixels below alpha 32, cropped to meaningful alpha with 32px source padding, resized with Pillow LANCZOS to a 700x229 aspect-preserving mark layer, and centered it on a transparent 768x384 RGBA canvas."
     },
+    "favicon.png": {
+      "kind": "derived-from-fgen-logo",
+      "generatedAt": "2026-10-07",
+      "dimensions": "128x128",
+      "format": "PNG RGB",
+      "bytes": 4102,
+      "sha256": "e9a6e933dce31a4585b06e89371a6f40f9fcb9ddeec9df7f9090682c51d44b62",
+      "source": "public/assets/wtf/logo.png",
+      "sourceDimensions": "768x384",
+      "sourceSha256": "bbc13cc6639fd46d8ec2de089fa550ee59f8d07e9652e7ba656544b9215b7df0",
+      "background": "#1f42f3 opaque cobalt",
+      "alpha": "none; opaque RGB favicon",
+      "optimization": "Cropped source mark at alpha >= 32 with 6px source padding, resized proportionately with Pillow LANCZOS to 108x31, centered on a 128x128 #1f42f3 RGB canvas; no new generation."
+    },
     "fgit-logo.png": {
       "kind": "fgen-generated-transparent-cutout",
       "dimensions": "512x512",

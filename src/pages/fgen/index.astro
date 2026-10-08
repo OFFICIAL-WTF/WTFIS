@@ -79,7 +79,7 @@ const features = [
   <FgenRoutes />
   <FgenInstall />
 
-  <section class="fgen-features" aria-label="Additional FGEN features">
+  <section class="fgen-features" aria-label="Additional FGEN features" data-nav-light>
     <div class="fgen-features-inner">
       <div class="cta-gallery" id="fgen-features">
         <div class="cta-stack-inner scroll-stack-inner">
@@ -138,7 +138,7 @@ const features = [
   .quote-highlight { color: var(--acid); }
   .quote-oauth { display: inline-block; text-decoration: underline wavy var(--acid) 2px; text-underline-offset: 0.14em; }
   .quote-caret { display: inline-block; height: 0.85em; width: 0.09em; margin-left: 0.1em; background: var(--acid); vertical-align: -0.04em; }
-  .fgen-features { position: relative; z-index: 1; padding: 2rem 0 0; }
+  .fgen-features { position: relative; z-index: 1; padding: 2rem 0 0; background: #fff; }
   .fgen-features-inner { width: min(calc(100% - 2 * var(--edge)), 82rem); margin: 0 auto; }
   .fgen-features .cta-stack-inner { padding-bottom: clamp(3rem, 6vh, 5rem); }
   .fgen-features .scroll-stack-card {
@@ -150,9 +150,9 @@ const features = [
     min-height: 22rem;
     margin-bottom: clamp(1.5rem, 4vh, 3rem);
     padding: clamp(1rem, 2vw, 2rem);
-    border: 2px solid rgba(251,251,247,0.85);
+    border: 2px solid var(--electric-blue-deep);
     background: #0b1d82;
-    box-shadow: 0.55rem 0.65rem 0 rgba(7,27,145,0.58);
+    box-shadow: 0.55rem 0.65rem 0 rgba(11,40,182,0.16);
     transform: none;
     will-change: auto;
   }

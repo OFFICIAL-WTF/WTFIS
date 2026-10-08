@@ -33,7 +33,7 @@ const getPoint = (element: Element, stageBox: DOMRect, edge: "top" | "bottom"): 
 const roundedPath = (start: Point, end: Point, bendAt = 0.5) => {
   const distance = end.y - start.y;
   const direction = Math.sign(end.x - start.x);
-  const radius = Math.min(32, Math.abs(end.x - start.x) / 2, Math.max(0, distance) * Math.min(bendAt, 1 - bendAt));
+  const radius = Math.min(64, Math.abs(end.x - start.x) / 2, Math.max(0, distance) * Math.min(bendAt, 1 - bendAt));
   const bendY = start.y + distance * bendAt;
   return [
     `M ${start.x.toFixed(2)} ${start.y.toFixed(2)}`,
@@ -45,9 +45,21 @@ const roundedPath = (start: Point, end: Point, bendAt = 0.5) => {
   ].join(" ");
 };
 
+const mergePath = (start: Point, merge: Point) => {
+  const direction = Math.sign(merge.x - start.x);
+  const radius = Math.min(64, Math.abs(merge.x - start.x) / 2, Math.max(0, merge.y - start.y) / 2);
+  return [
+    `M ${start.x.toFixed(2)} ${start.y.toFixed(2)}`,
+    `V ${(merge.y - radius).toFixed(2)}`,
+    `Q ${start.x.toFixed(2)} ${merge.y.toFixed(2)} ${(start.x + direction * radius).toFixed(2)} ${merge.y.toFixed(2)}`,
+    `H ${merge.x.toFixed(2)}`,
+  ].join(" ");
+};
+
 const initRouteStory = (root: HTMLElement) => {
   const stage = root.querySelector<HTMLElement>("[data-route-stage]");
   const svg = root.querySelector<SVGSVGElement>("[data-route-lines]");
+  const junction = root.querySelector<SVGCircleElement>("[data-route-junction]");
   const agent = root.querySelector<HTMLElement>('[data-route-node="agent"]');
   const you = root.querySelector<HTMLElement>('[data-route-node="you"]');
   const cli = root.querySelector<HTMLElement>('[data-terminal="cli"]');
@@ -67,6 +79,7 @@ const initRouteStory = (root: HTMLElement) => {
   if (
     !stage ||
     !svg ||
+    !junction ||
     !agent ||
     !you ||
     !cli ||
@@ -94,20 +107,22 @@ const initRouteStory = (root: HTMLElement) => {
     const lowerTravel = Math.max(120, imageTop.y - terminalBottom);
     const merge: Point = {
       x: stageBox.width / 2,
-      y: terminalBottom + lowerTravel * 0.52,
+      y: terminalBottom + lowerTravel * 0.6,
     };
 
     const pathsByName: Record<RoutePathName, string> = {
       "agent-cli": roundedPath(agentPoint, cliTop),
       "you-tui": roundedPath(youPoint, tuiTop),
-      "cli-merge": roundedPath(cliBottom, merge, 0.62),
-      "tui-merge": roundedPath(tuiBottom, merge, 0.62),
-      "merge-output": roundedPath(merge, imageTop),
+      "cli-merge": mergePath(cliBottom, merge),
+      "tui-merge": mergePath(tuiBottom, merge),
+      "merge-output": `M ${merge.x.toFixed(2)} ${merge.y.toFixed(2)} V ${imageTop.y.toFixed(2)}`,
     };
 
     PATH_NAMES.forEach((name, index) => {
       paths[index].setAttribute("d", pathsByName[name]);
     });
+    junction.setAttribute("cx", merge.x.toFixed(2));
+    junction.setAttribute("cy", merge.y.toFixed(2));
   };
 
   const scheduleGeometry = () => {
@@ -129,6 +144,7 @@ const initRouteStory = (root: HTMLElement) => {
     ) as Record<RoutePathName, SVGPathElement>;
 
     gsap.set(paths, { strokeDasharray: 1, strokeDashoffset: 1 });
+    gsap.set(junction, { opacity: 0 });
     gsap.set(image, { opacity: 0.72 });
     if (command) command.textContent = "";
     if (progress) gsap.set(progress, { scaleX: 0, transformOrigin: "left center" });
@@ -150,10 +166,10 @@ const initRouteStory = (root: HTMLElement) => {
         ease: "none",
         scrollTrigger: {
           trigger: start,
-          start: "bottom 84%",
+          start: "bottom 76%",
           endTrigger: end,
-          end: "top 34%",
-          scrub: true,
+          end: "top 66%",
+          scrub: 0.45,
           invalidateOnRefresh: true,
           id: `fgen-upper-${name}`,
         },
@@ -196,41 +212,23 @@ const initRouteStory = (root: HTMLElement) => {
     if (grid) tuiDemo.to(grid, { opacity: 1, y: 0, duration: 0.28 }, 0.68);
     if (gridImages.length) tuiDemo.to(gridImages, { opacity: 1, scale: 1, duration: 0.28, stagger: 0.06 }, 0.82);
 
-    const lowerRoutes: Array<[RoutePathName, HTMLElement]> = [
-      ["cli-merge", cli],
-      ["tui-merge", tui],
-    ];
-    lowerRoutes.forEach(([name, start]) => {
-      gsap.to(pathByName[name], {
-        strokeDashoffset: 0,
-        autoRound: false,
-        ease: "none",
-        scrollTrigger: {
-          trigger: start,
-          start: "bottom 78%",
-          endTrigger: image,
-          end: "top 58%",
-          scrub: true,
-          invalidateOnRefresh: true,
-          id: `fgen-lower-${name}`,
-        },
-      });
-    });
-
     const outputTimeline = gsap.timeline({
       defaults: { ease: "none", autoRound: false },
       scrollTrigger: {
-        trigger: image,
-        start: "top 64%",
-        end: "top 24%",
-        scrub: 0.8,
+        trigger: cli,
+        start: "bottom 78%",
+        endTrigger: image,
+        end: "top 34%",
+        scrub: 0.45,
         invalidateOnRefresh: true,
         id: "fgen-route-output",
       },
     });
     outputTimeline
-      .to(pathByName["merge-output"], { strokeDashoffset: 0, duration: 0.72 }, 0)
-      .to(image, { opacity: 1, duration: 0.48 }, 0.34);
+      .to([pathByName["cli-merge"], pathByName["tui-merge"]], { strokeDashoffset: 0, duration: 0.64 }, 0)
+      .to(junction, { opacity: 1, duration: 0.04 }, 0.64)
+      .to(pathByName["merge-output"], { strokeDashoffset: 0, duration: 0.36 }, 0.64)
+      .to(image, { opacity: 1, duration: 0.18 }, 0.82);
 
     return () => {
       if (command) command.textContent = commandText;

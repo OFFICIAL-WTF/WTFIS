@@ -15,6 +15,7 @@ const fgenAsset = (name: string) => `${base}assets/fgen/${name}`;
       <path class="route-path route-path--lower" pathLength="1" data-route-path="cli-merge" d="M245 900 L245 1000 L500 1060" />
       <path class="route-path route-path--lower" pathLength="1" data-route-path="tui-merge" d="M755 900 L755 1000 L500 1060" />
       <path class="route-path route-path--output" pathLength="1" data-route-path="merge-output" d="M500 1060 L500 1140" />
+      <circle class="route-junction" data-route-junction cx="500" cy="1060" r="4" />
     </svg>
 
     <div class="fgen-route-actors" data-route-actors>
@@ -83,32 +84,28 @@ const fgenAsset = (name: string) => `${base}assets/fgen/${name}`;
       <figure class="fgen-route-image">
         <a
           class="fgen-route-image-link"
-          href="https://commons.wikimedia.org/wiki/File:AI_generated_Art_with_Midjourney.png"
+          href={fgenAsset("feet-creature.webp")}
           target="_blank"
           rel="noreferrer noopener"
-          title="AI generated Art with Midjourney — George Grigorescu, via Wikimedia Commons, CC BY-SA 4.0"
-          aria-label="Open source image by George Grigorescu on Wikimedia Commons"
+          title="Original artwork generated with FGEN"
+          aria-label="Open the original FGEN feet creature image"
         >
           <img
-            src={fgenAsset("internet-generated.webp")}
-            alt="Heraldic butterfly with four blue open wings, by George Grigorescu"
-            width="720"
-            height="720"
+            src={fgenAsset("feet-creature.webp")}
+            alt="A glossy cobalt creature standing on an absurd cluster of oversized pink feet"
+            width="1024"
+            height="1024"
             decoding="async"
           />
         </a>
         <figcaption class="fgen-route-attribution">
-          <a
-            href="https://commons.wikimedia.org/wiki/File:AI_generated_Art_with_Midjourney.png"
-            target="_blank"
-            rel="noreferrer noopener"
-          >George Grigorescu · CC BY-SA 4.0</a>
+          <span>Made with FGEN · original artwork</span>
           <a
             href={fgenAsset("provenance.json")}
             target="_blank"
             rel="noreferrer noopener"
             aria-label="View image provenance"
-          >↗</a>
+          >provenance ↗</a>
         </figcaption>
       </figure>
     </div>
@@ -170,21 +167,30 @@ const fgenAsset = (name: string) => `${base}assets/fgen/${name}`;
 
   .route-path {
     fill: none;
-    stroke: var(--fgen-paper);
-    stroke-width: 1.8;
+    color: var(--fgen-paper);
+    stroke: currentColor;
+    stroke-width: 2.25;
     stroke-linecap: round;
     stroke-linejoin: round;
     vector-effect: non-scaling-stroke;
+    filter: drop-shadow(0 0 3px currentColor) drop-shadow(0 0 9px var(--route-halo, rgba(251, 251, 247, 0.32)));
   }
 
   .route-path--lower {
-    stroke: var(--fgen-acid);
-    stroke-width: 1.7;
+    --route-halo: rgba(212, 255, 69, 0.35);
+    color: var(--fgen-acid);
+    stroke-width: 2.5;
   }
 
   .route-path--output {
-    stroke: var(--fgen-acid);
-    stroke-width: 2;
+    --route-halo: rgba(212, 255, 69, 0.35);
+    color: var(--fgen-acid);
+    stroke-width: 2.8;
+  }
+
+  .route-junction {
+    fill: var(--fgen-acid);
+    filter: drop-shadow(0 0 5px var(--fgen-acid));
   }
 
   .fgen-route-actors {
@@ -198,12 +204,22 @@ const fgenAsset = (name: string) => `${base}assets/fgen/${name}`;
   }
 
   .fgen-route-node {
+    align-self: start;
     display: grid;
     justify-items: center;
     align-content: start;
     gap: 0.8rem;
     min-width: 0;
     text-align: center;
+  }
+
+  .fgen-route-node::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--fgen-paper);
+    box-shadow: 0 0 8px rgba(251, 251, 247, 0.7);
   }
 
   .fgen-route-node img {
