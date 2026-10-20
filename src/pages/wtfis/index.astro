@@ -1,5 +1,6 @@
 ---
 import "../../styles/wtfis.css";
+import "lenis/dist/lenis.css";
 import CompanyScroller from "../../components/CompanyScroller.astro";
 import HeroNotifications from "../../components/HeroNotifications.astro";
 const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
@@ -458,7 +459,11 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
         function setupLenis() {
           if (!hasGsap || reduceMotion) return;
 
-          lenis = new Lenis({ lerp: 0.08, smoothWheel: true });
+          lenis = new Lenis({
+            duration: 1.05,
+            easing: (progress) => 1 - Math.pow(1 - progress, 3),
+            smoothWheel: true,
+          });
           lenis.on("scroll", ScrollTrigger.update);
           lenisTicker = (time) => lenis.raf(time * 1000);
           gsap.ticker.add(lenisTicker);
