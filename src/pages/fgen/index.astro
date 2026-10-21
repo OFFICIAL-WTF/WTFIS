@@ -177,7 +177,8 @@ const features = [
   :global(.site-layout--fgen .footer-links a:hover) { color: var(--acid); }
   :global(.site-layout--fgen .footer-links a:focus-visible) { outline: 2px solid var(--acid); outline-offset: 4px; }
   @media (max-width: 760px) {
-    .fgen-hero .title-stage { padding-bottom: 8rem; }
+    .fgen-hero #fgen-title { font-size: clamp(2.8rem, 14vw, 4.5rem); }
+    .fgen-hero .title-stage { padding-bottom: 11.5rem; }
     .quote-stage { min-height: 80svh; padding: 8rem 1.25rem; }
     .quote-shell { border-radius: 0.8rem; }
     .quote-sticker--top { top: -6rem; left: 0; }

@@ -108,21 +108,21 @@
       "source": "https://raw.githubusercontent.com/openai/sign-in-with-chatgpt-devkit/main/assets/brand/chatgpt-card-24.svg",
       "licenseNote": "OpenAI brand asset; retain OpenAI brand guidance and do not imply endorsement."
     },
-    "feet-creature.webp": {
+    "human-creator.webp": {
       "kind": "fgen-generated-original",
-      "generatedAt": "2026-10-07",
+      "generatedAt": "2026-10-21",
       "dimensions": "1024x1024",
       "format": "WebP lossy",
-      "bytes": 73444,
-      "sha256": "1fdfcb67de503bb1a54e531955a0bc42c23330707c4a464b48a545e5ef9774f6",
+      "bytes": 88836,
+      "sha256": "6b6540600ab613865787c2e97fd42b707039e609992292c19962bbbfbc55fd7c",
       "sourceDimensions": "1254x1254",
       "sourceFormat": "PNG RGB",
-      "sourceBytes": 2044784,
-      "sourceSha256": "ca59ce31594ad4ff2cc42218522864e2b7d49226e85a2e1eee1300d0bae2351e",
+      "sourceBytes": 2125492,
+      "sourceSha256": "3e044dc991ff46855c29cffdc722f4dc80d33e85a3b18d937dfc1f57ecffd5b2",
       "alpha": "not present; verified opaque RGB source and WebP output",
-      "prompt": "Original square surreal editorial 3D illustration, not based on any existing artwork: a funny cobalt-blue fantasy creature with a rounded glossy body standing on many oversized fleshy-pink cartoon feet. The pink feet and toes are the main subject, clearly visible across the lower half, arranged in an absurd impossible cluster. Acid-lime spots and small geometric details, warm coral and cream abstract studio set, dramatic playful lighting, graphic cast shadows, vivid tactile surfaces, weird charismatic fashion-editorial composition, full creature inside the square. Non-erotic, non-violent, no gore, no people, no text, no letters, no logos, no watermark, no artist imitation, no stock art.",
-      "command": "fgen gen <prompt> --out /tmp/wtf-fgen-feet-creature-source.png --quality high --size 1024x1024 --timeout 600 --json; cwebp -quiet -q 84 -resize 1024 1024 /tmp/wtf-fgen-feet-creature-source.png -o public/assets/fgen/feet-creature.webp",
-      "generationEvidence": "fgen JSON saved event: job 0, bytes 2044784, path /tmp/wtf-fgen-feet-creature-source.png, elapsed 28803ms; summary ok=true. No generation event ID was provided. Source inspected as 1254x1254 PNG RGB.",
+      "prompt": "Original square editorial photograph for a playful independent creative-tool website, depicting one entirely fictional adult woman about 35 years old, not resembling any real person. A warm, candid waist-up portrait in a sunlit creative studio: short dark wavy hair, natural expressive face with subtle freckles, a relaxed genuine smile, believable adult anatomy and natural proportions. She wears a tactile cobalt-blue cotton work shirt over a cream top and is making a simple sculptural loop from thick cream paper at a workbench; both natural hands are clearly visible, one gently holding the paper loop and the other resting on the table. A small acid-lime paper offcut brings a vivid accent. Soft warm cream plaster background with a single cobalt-blue panel, beautiful directional window light, tangible paper fibers and woven fabric, realistic skin texture, subtle analog film grain, sophisticated independent magazine photography, intimate and optimistic rather than glossy advertising. Human face and upper body remain the main subject, composition balanced inside a square with comfortable margins, rich cobalt, warm cream and small acid-lime accents. Photoreal, no surreal anatomy, no extra limbs, no plastic or CGI skin, no creature, no text, no letters, no logos, no watermark, no artist imitation.",
+      "command": "fgen gen <prompt> --out /tmp/fgen-human-creator-source.png --quality high --size 1024x1024 --timeout 900 --json; cwebp -quiet -q 84 -resize 1024 1024 /tmp/fgen-human-creator-source.png -o public/assets/fgen/human-creator.webp",
+      "generationEvidence": "fgen JSON saved event: job 0, bytes 2125492, path /tmp/fgen-human-creator-source.png, elapsed 46102ms; summary ok=true, failed=[]. No generation event ID was provided. Source inspected as 1254x1254 PNG RGB.",
       "optimization": "Resized full source to 1024x1024 and encoded with cwebp -quiet -q 84; delivered file inspected as opaque 1024x1024 WebP."
     },
     "float-01.webp": {
